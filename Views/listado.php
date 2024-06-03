@@ -17,7 +17,7 @@ include_once("../Models/peticionesSql.php");
   
   <div class="mt-5 d-flex justify-content-center p">
     <div class="mt-5 card col-9">
-      <h5 class="card-header">Registrate</h5>
+      <h5 class="card-header">Personal</h5>
       <div class="card-body">
         <div class="container text-center ">
           <div class="row">
@@ -29,7 +29,6 @@ include_once("../Models/peticionesSql.php");
                 <input type="text" name="edad" placeholder="edad" class="mt-2 form-control">
                 <input type="text" name="dni" placeholder="dni" class="mt-2 form-control">
                 <button type="submit" name="enviar" class="mt-2 btn btn-primary form-control">Crear persona</button>
-                <button type="submit" name="volverLogin" class="mt-2 btn btn-primary form-control">Login</button>
                 <?php
                 // Crear persona
                 if (isset($_POST['enviar'])) {

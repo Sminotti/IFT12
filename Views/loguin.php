@@ -26,7 +26,7 @@ include_once("Models/peticionesSql.php");
                         <button type="submit" class="btn btn-primary form-control">Ingrese</button>
                   </div>
             </form>
-            <a href="./Views/registro.php" class="btn btn-primary form-control">Registrate</a>
+            <a href="./Views/registrar.php" class="btn btn-primary form-control">Registrate</a>
         </div>
       </div>
     </div>

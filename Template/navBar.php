@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
-    <a class="navbar-brand text-white" href="#">Proyecto Ifts12</a>
+    <a class="navbar-brand text-white" href="../index.php">Proyecto Ifts12</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,10 +12,10 @@
       <div class="offcanvas-body bg-dark">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="Views/index.php">Home</a>
+            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="#">Listar Personas</a>
+            <a class="nav-link " href="./Views/listado.php" >Listar Personas</a>
           </li>
         </ul>
       </div>
