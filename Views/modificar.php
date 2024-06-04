@@ -8,6 +8,8 @@ include_once("../Models/peticionesSql.php");
 $idPersona= $_GET['idPersona']?? null;
 ?>
 
+<h1><?php echo $idPersona ?></h1>
+
 <!-- Modal -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">

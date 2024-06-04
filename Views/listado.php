@@ -14,7 +14,7 @@ include_once("../Models/peticionesSql.php");
 <body>
 
   <?php include_once("../Template/navBar.php"); ?>
-  
+
   <div class="mt-5 d-flex justify-content-center p">
     <div class="mt-5 card col-9">
       <h5 class="card-header">Personal</h5>
@@ -73,10 +73,14 @@ include_once("../Models/peticionesSql.php");
                       <td>
 
                         <!-- Button modal editar-->
-                        <a class="btn btn-primary" href="Views/modificar.php?id=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal?idPersona">
+                        <i class="bi bi-pencil-square"></i>
+                        </button>
+                        
+                        <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
 
                         <!-- Button modal eliminar-->
-                        <a class="btn btn-danger" href="Views/eliminar.php?id=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
+                        <a class="btn btn-danger" href="../Views/eliminar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
 
                         <?php
                         if (isset($_POST['enviarEliminar'])) {
