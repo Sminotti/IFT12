@@ -72,11 +72,11 @@ include_once("../Models/peticionesSql.php");
                       <td><?php echo $row["dni"]; ?></td>
                       <td>
 
-                        <!-- Button modal editar-->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal?idPersona">
-                        <i class="bi bi-pencil-square"></i>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModalPrueba">
+                          ModalPrueba
                         </button>
-                        
+
                         <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
 
                         <!-- Button modal eliminar-->
