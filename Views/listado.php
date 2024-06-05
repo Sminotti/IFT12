@@ -72,21 +72,13 @@ include_once("../Models/peticionesSql.php");
                       <td><?php echo $row["dni"]; ?></td>
                       <td>
 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModalPrueba">
-                          ModalPrueba
-                        </button>
+                        <!-- Button modal editar-->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal?idPersona=<?php  echo $row["idPersona"]; ?>">Editar</button>
 
                         <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
 
                         <!-- Button modal eliminar-->
                         <a class="btn btn-danger" href="../Views/eliminar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
-
-                        <?php
-                        if (isset($_POST['enviarEliminar'])) {
-                          $eliminarRegistro = mysqli_query($conectarDB, $eliminar);
-                        }
-                        ?>
 
                       </td>
                     </tr>

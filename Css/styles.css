@@ -1,20 +1,21 @@
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-	margin:0;
-	background-color: #333; 
-	font-family: sans-serif;
-	color: aliceblue;
-	position: relative;
+  margin: 0;
+  background-color: #333;
+  font-family: sans-serif;
+  color: aliceblue;
+ width: 100%;
+ height: 200%;
 }
 
 .footer {
-	background-color: grey;
-	text-align: center;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-
+  background-color: grey;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
+

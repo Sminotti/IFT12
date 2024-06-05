@@ -13,7 +13,7 @@ $listar = "SELECT * FROM persona";
 $listarRegistro="SELECT * FROM persona WHERE idPersona='$idPersona'";
 $editar = "UPDATE persona SET nombre='$nombre',apellido='$apellido',edad='$edad',dni='$dni' WHERE idPersona='$idPersona' ";
 //ELIMINAR REGISTRO//
-$eliminar = "DELETE * FROM persona WHERE idPersona='$idPersona'";
+$eliminar = "DELETE FROM persona WHERE idPersona='$idPersona'";
 
 
 
