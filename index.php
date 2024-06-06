@@ -1,7 +1,7 @@
 <?php
-include_once("/xampp/htdocs/Mis_proyectos/Proyecto_clase/Clases/Cconeccion.php");
+include_once("Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
-include_once("/xampp/htdocs/Mis_proyectos/Proyecto_clase/Models/peticionesSql.php");
+include_once("Models/peticionesSql.php");
 ?>
 
 <!DOCTYPE html>

@@ -25,10 +25,11 @@ include_once("Models/peticionesSql.php");
       </form>
       <!--Boton modal Registro-->
       <button type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#modalRegistrar">
-        Registrate
+        Registrese
       </button>
     </div>
   </div>
 
 <?php include_once("Components/modalRegistrar.php"); ?>
+
 
