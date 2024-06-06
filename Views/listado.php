@@ -11,7 +11,7 @@ include_once("../Models/peticionesSql.php");
 
 <?php include_once("../Template/head.php"); ?>
 
-<body>
+<body class="content">
 
   <?php include_once("../Template/navBar.php"); ?>
 
