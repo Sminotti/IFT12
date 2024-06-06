@@ -1,19 +1,17 @@
 
 <?php
-include_once("../Cconeccion.php");
+include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-
-$idPersona= $_GET['idPersona']?? null;
+$idPersona = $_GET['idPersona'] ?? null;
 ?>
 
-
-
-
+<?php echo "persona ". $idPersona; ?>
 
 
 <!-- Modal -->
-<div class="modal fade" id="editModalPrueba" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditar?idPersona=<?php echo $row["idPersona"]; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -21,7 +19,8 @@ $idPersona= $_GET['idPersona']?? null;
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <?php echo $idpersona ?>
+        <?php echo "persona"." ". $idPersona ?>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

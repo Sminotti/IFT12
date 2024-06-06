@@ -19,3 +19,9 @@ body {
   width: 100%;
 }
 
+.centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set the height to 100% of the viewport */
+}

@@ -15,7 +15,7 @@ include_once("../Models/peticionesSql.php");
 
   <?php include_once("../Template/navBar.php"); ?>
 
-  <div class="mt-5 d-flex justify-content-center p">
+  <div class="centrar">
     <div class="mt-5 card col-9">
       <h5 class="card-header">Personal</h5>
       <div class="card-body">
@@ -73,11 +73,13 @@ include_once("../Models/peticionesSql.php");
                       <td>
 
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal?idPersona=<?php  echo $row["idPersona"]; ?>">Editar</button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEditar?idPersona=<?php echo $row["idPersona"]; ?>">  Modal </button>
 
+
+                        <!-- Button eliminar-->
                         <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
 
-                        <!-- Button modal eliminar-->
+                        <!-- Button eliminar-->
                         <a class="btn btn-danger" href="../Views/eliminar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
 
                       </td>
@@ -85,8 +87,9 @@ include_once("../Models/peticionesSql.php");
 
                   <?php } ?>
                 </tbody>
+             
               </table>
-
+           
             </div>
           </div>
         </div>

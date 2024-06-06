@@ -1,5 +1,3 @@
-<!--MODAL EDITAR-->
-
 <?php
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
@@ -15,14 +13,14 @@ $idPersona = $_GET['idPersona'] ?? null;
   <?php include_once("../Template/navBar.php"); ?>
 
 
-  <?php
-  // Lista persona para editar
-  $listarRegistro = mysqli_query($conectarDB, $listarRegistro);
-  while ($row = mysqli_fetch_array($listarRegistro)) { ?>
-    <div class="centrar">
-      <div class="card border-success mb-3" style="max-width: 18rem;">
-        <div class="card-header bg-transparent border-success">Actualizar registro <?php echo $idPersona ?></div>
-        <div class="card-body text-success">
+  <div class="centrar">
+    <div class="card border-success mb-3" style="max-width: 25rem;">
+      <div class="card-header bg-transparent border-success">Actualizar registro <?php echo $idPersona ?></div>
+      <div class="card-body text-success">
+        <?php
+        // Lista persona para editar
+        $listarRegistro = mysqli_query($conectarDB, $listarRegistro);
+        while ($row = mysqli_fetch_array($listarRegistro)) { ?>
           <form method="post" class="d-grid bg-dark p-2 rounded">
             <input type="text" name="nombre" value="<?php echo $row["nombre"]; ?>" class=" form-control">
             <input type="text" name="apellido" value="<?php echo $row["apellido"]; ?>" class="mt-2 form-control">
@@ -39,12 +37,12 @@ $idPersona = $_GET['idPersona'] ?? null;
             ?>
           </form>
         <?php } ?>
-        </div>
-        <div class="card-footer bg-transparent border-success">Footer</div>
       </div>
+      <div class="card-footer bg-transparent border-success">Footer</div>
     </div>
+  </div>
 
-    <?php include_once("../Template/footer.php"); ?>
+  <?php include_once("../Template/footer.php"); ?>
 </body>
 
 </html>

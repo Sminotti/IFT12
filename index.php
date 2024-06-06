@@ -14,7 +14,7 @@ include_once("Models/peticionesSql.php");
             <?php include_once("Template/navBar.php"); ?>
       </div>
      
-            <div class="d-flex justify-content-center align-items-center">
+            <div class="centrar">
                   <?php include_once("Views/loguin.php"); ?>
             </div>
   
