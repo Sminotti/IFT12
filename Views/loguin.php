@@ -6,7 +6,7 @@ include_once("Models/peticionesSql.php");
 ?>
 
 
-<div class="card " style="width: 300px; height: 350px ">
+<div class="card " style="width: 300px; height: auto ">
   <div class="card-header">
     Ingresa o registrate
   </div>
@@ -24,7 +24,7 @@ include_once("Models/peticionesSql.php");
         <button type="submit" class="btn btn-primary form-control">Ingrese</button>
       </div>
     </form>
-
+<!--Boton modal Registro-->
     <button type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#modalRegistrar">
       Registrate
     </button>
@@ -33,16 +33,15 @@ include_once("Models/peticionesSql.php");
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<!-- Modal Registrar-->
+<div class="modal fade " id="modalRegistrar" tabindex="-1" aria-labelledby="modalRegistrarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="card " style="width: 300px; height: 350px ">
+      <div class="modal-body d-flex justify-content-center">
+        <div class="card " style="width: 300px; height: auto ">
           <div class="card-header">
             Ingresa tus datos y registrate
           </div>
@@ -56,8 +55,16 @@ include_once("Models/peticionesSql.php");
                 <label for="inputPassword4" class="form-label">Password</label>
                 <input type="password" class="form-control" id="registrarPassword">
               </div>
+              <div>
+                <label for="nombreLabel" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="registrarNombre">
+              </div>
+              <div>
+                <label for="apellidoLabel" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="registrarApellido">
+              </div>
               <div class="mb-3">
-                <button type="submit" name="Registrate" class="btn btn-primary form-control">Ingrese</button>
+                <button type="submit" name="Registrate" class="btn btn-primary form-control">Registrarse</button>
               </div>
             </form>
      
