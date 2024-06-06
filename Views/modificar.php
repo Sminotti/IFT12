@@ -6,17 +6,21 @@ $idPersona = $_GET['idPersona'] ?? null;
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <?php include_once("../Template/head.php"); ?>
 
-<body>
+<body class="content">
+
   <?php include_once("../Template/navBar.php"); ?>
 
-
   <div class="centrar">
-    <div class="card border-success mb-3" style="max-width: 25rem;">
-      <div class="card-header bg-transparent border-success">Actualizar registro <?php echo $idPersona ?></div>
-      <div class="card-body text-success">
+
+    <div class="card " style="width: 300px; height: auto ">
+      <div class="card-header">
+        Modificar datos<?php echo $idPersona ?>
+      </div>
+      <div class="card-body">
         <?php
         // Lista persona para editar
         $listarRegistro = mysqli_query($conectarDB, $listarRegistro);
@@ -30,19 +34,15 @@ $idPersona = $_GET['idPersona'] ?? null;
             <?php
             // Modificar persona
             if (isset($_POST['modificar'])) {
-              $ingresarRegistro = mysqli_query($conectarDB, $editar);
-
+              $modificarRegistro = mysqli_query($conectarDB, $editar);
               header('location: listado.php');
             }
             ?>
           </form>
         <?php } ?>
       </div>
-      <div class="card-footer bg-transparent border-success">Footer</div>
     </div>
   </div>
-
-  <?php include_once("../Template/footer.php"); ?>
 </body>
 
 </html>

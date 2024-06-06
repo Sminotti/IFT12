@@ -3,7 +3,7 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-
+$idPersona = $_GET['idPersona'] ?? null;
 
 ?>
 <!DOCTYPE html>
@@ -73,7 +73,7 @@ include_once("../Models/peticionesSql.php");
                       <td>
 
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEditar?idPersona=<?php echo $row["idPersona"]; ?>">  Modal </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalModificar?idPersona=<?php  echo $row["idPersona"]; ?>">  Modal </button>
 
 
                         <!-- Button eliminar-->
@@ -96,6 +96,7 @@ include_once("../Models/peticionesSql.php");
       </div>
     </div>
   </div>
+  <?php include_once("../Components/modalModificar.php"); ?>
   <?php include_once("../Template/footer.php"); ?>
 
 </body>

@@ -49,7 +49,7 @@ include_once("Models/peticionesSql.php");
                 <button type="submit" name="Registrate" class="btn btn-primary form-control">Registrarse</button>
               </div>
               <?php
-                // Crear persona
+               
                 if (isset($_POST['Registrate'])) {
                   $ingresarRegistro = mysqli_query($conectarDB, $insertar);
                   header('location: ../index.php');

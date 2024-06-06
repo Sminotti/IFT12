@@ -1,7 +1,7 @@
 <?php
-include_once("Clases/Cconeccion.php");
+include_once("/xampp/htdocs/Mis_proyectos/Proyecto_clase/Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
-include_once("Models/peticionesSql.php");
+include_once("/xampp/htdocs/Mis_proyectos/Proyecto_clase/Models/peticionesSql.php");
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +21,7 @@ include_once("Models/peticionesSql.php");
       <div>
             <?php include_once("Template/footer.php"); ?>
       </div>
+
 </body>
 
 </html>
