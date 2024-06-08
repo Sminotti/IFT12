@@ -9,7 +9,7 @@ $idPersona = $_GET['idPersona'] ?? null;
 // Elimina persona
 if (isset($idPersona)) {
       
-    $eliminarRegistro = mysqli_query($conectarDB, $eliminar);
+    $eliminarPersona = mysqli_query($conectarDB, $eliminar);
 
     header('location: listado.php');
 }

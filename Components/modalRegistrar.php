@@ -51,8 +51,9 @@ include_once("Models/peticionesSql.php");
               <?php
                
                 if (isset($_POST['Registrate'])) {
-                  $ingresarRegistro = mysqli_query($conectarDB, $insertar);
-                  header('location: ../index.php');
+                  $ingresarRegistro = mysqli_query($conectarDB, $insertarPersona);
+                  $ingresarRegistro = mysqli_query($conectarDB, $registroUsuario);
+                  header('location: Views/listado.php');
                 }
                 ?>
             </form>
