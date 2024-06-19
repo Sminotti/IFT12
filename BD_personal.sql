@@ -19,10 +19,10 @@ SET time_zone = "+00:00";
 
 --
 -- Base de datos: `personal`
---
-
+-- 
+CREATE DATABASE `personal`;
 -- --------------------------------------------------------
-
+USE `personal`;
 --
 -- Estructura de tabla para la tabla `cargo`
 --

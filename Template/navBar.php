@@ -15,7 +15,7 @@
             <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="../Views/listado.php" >Listar Empleados </a>
+            <a class="nav-link " href="Views/listado.php" >Listar Empleados </a>
           </li>
         </ul>
       </div>

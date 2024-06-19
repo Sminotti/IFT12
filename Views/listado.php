@@ -73,7 +73,7 @@ $idPersona = $_GET['idPersona'] ?? null;
                       <td>
 
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalModificar?idPersona=<?php  echo $row["idPersona"]; ?>">  Modal </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php  echo $row["idPersona"]; ?>">  Modal </button>
 
 
                         <!-- Button eliminar-->
