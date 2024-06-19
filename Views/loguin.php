@@ -1,16 +1,31 @@
 <?php
-include_once("Clases/Cconeccion.php");
-$conectarDB = Cconeccion::ConeccionDB();
-include_once("Models/peticionesSql.php");
+//include_once("Clases/Cconeccion.php");
+//$conectarDB = Cconeccion::ConeccionDB();
+//include_once("Models/peticionesSql.php");
 include_once("Controllers/CLoguin.php");
+$usuario = $_POST['usuario']?? NULL;
+$password = $_POST['password'] ?? NULL;
 ?>
 
 
 <div class="card " style="width: 300px; height: auto ">
+
+
   <div class="card-header">
     Ingresa o registrate
   </div>
   <div class="card-body">
+      <!-- Boton login con validaciones-->
+<?php
+  if (isset($_POST['login'])) {
+    if (!empty($_POST['usuario'])&&!empty($_POST['usuario']) ) {
+      header('location: Views/listado.php');
+    }  else  {
+      echo " <div class='alert alert-danger' role='alert'> A simple danger alert—check it out! </div>";
+    }    
+  }
+?>
+ <!-- Boton login con validaciones-->
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="row g-3">
       <div>
         <label for="inputEmail4" class="form-label">Email</label>
@@ -30,12 +45,9 @@ include_once("Controllers/CLoguin.php");
     </button>
   </div>
 </div>
-<?php
-if (isset($_POST['login'])) {
-  $usuario = $_POST['usuario'];
-  $password = $_POST['password'];
-  $ingresar = verificarLogin($usuario, $password);
- echo $ingresar; 
-}
+
+
+
+<?php 
+  include_once("Components/modalRegistrar.php"); 
 ?>
-<?php include_once("Components/modalRegistrar.php"); ?>
