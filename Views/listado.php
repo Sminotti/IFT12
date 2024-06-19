@@ -41,7 +41,6 @@ $idPersona = $_GET['idPersona'] ?? null;
                   header('location: ../index.php');
                 }
                 ?>
-
               </form>
             </div>
 
