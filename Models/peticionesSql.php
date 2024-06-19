@@ -10,7 +10,7 @@ $password = $_POST['password'] ?? null;
 // REGISTRO DE USUARIO //
 $registroUsuario = "INSERT INTO usuario (usuario,password) value ('$usuario','$password') ";
 // LOGIN //
-$login = "SELECT * FROM usuario WHERE habilitado=1 AND eliminado = 0";
+$login = "SELECT * FROM usuario WHERE usuario=$usuario AND password=$password AND habilitado=1 AND eliminado = 0";
 // INSERTAR REGISTRO PERSONA//
 $insertarPersona = "INSERT INTO persona (nombre,apellido,edad,dni) Values ('$nombre','$apellido','$edad','$dni')";
 // LISTAR REGISTROS PERSONAS//
