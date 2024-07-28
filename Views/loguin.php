@@ -1,8 +1,8 @@
 <?php
-//include_once("Clases/Cconeccion.php");
-//$conectarDB = Cconeccion::ConeccionDB();
-//include_once("Models/peticionesSql.php");
-include_once("Controllers/CLoguin.php");
+include_once("Clases/Cconeccion.php");
+$conectarDB = Cconeccion::ConeccionDB();
+include_once("Models/peticionesSql.php");
+
 $usuario = $_POST['usuario']?? NULL;
 $password = $_POST['password'] ?? NULL;
 ?>
@@ -19,9 +19,12 @@ $password = $_POST['password'] ?? NULL;
 <?php
   if (isset($_POST['login'])) {
     if (!empty($_POST['usuario'])&&!empty($_POST['usuario']) ) {
-      header('location: Views/listado.php');
+      $ingresarLogin = mysqli_query($conectarDB, $login);
+      if($ingresarLogin){
+        header('location: Views/listado.php');
+      }    
     }  else  {
-      echo " <div class='alert alert-danger' role='alert'> A simple danger alert—check it out! </div>";
+      echo " <div class='alert alert-danger' role='alert'> Ingrese usuario y contraseña</div>";
     }    
   }
 ?>

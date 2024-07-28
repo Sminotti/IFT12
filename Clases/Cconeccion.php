@@ -1,4 +1,5 @@
 <?php
+//CONECION A LA BASE DE DATOS//
 class Cconeccion
 {
     public static function ConeccionDB()

@@ -1,5 +1,4 @@
 <?php
-
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
@@ -32,7 +31,7 @@ $idPersona = $_GET['idPersona'] ?? null;
                 <?php
                 // Crear persona
                 if (isset($_POST['enviar'])) {
-                  $ingresarRegistro = mysqli_query($conectarDB, $insertar);
+                  $ingresarRegistro = mysqli_query($conectarDB, $insertarPersona);
                 }
                 ?>
                 <?php
@@ -52,7 +51,8 @@ $idPersona = $_GET['idPersona'] ?? null;
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Edad</th>
-                    <th scope="col">DNI</th>
+                    <th scope="col">Dni</th>
+           
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -69,26 +69,19 @@ $idPersona = $_GET['idPersona'] ?? null;
                       <td><?php echo $row["apellido"]; ?></td>
                       <td><?php echo $row["edad"]; ?></td>
                       <td><?php echo $row["dni"]; ?></td>
+                
                       <td>
-
                         <!-- Button modal editar-->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php  echo $row["idPersona"]; ?>">  Modal </button>
-
-
                         <!-- Button eliminar-->
                         <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
-
                         <!-- Button eliminar-->
                         <a class="btn btn-danger" href="../Views/eliminar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
-
                       </td>
                     </tr>
-
                   <?php } ?>
-                </tbody>
-             
+                </tbody>           
               </table>
-           
             </div>
           </div>
         </div>

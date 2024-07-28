@@ -22,27 +22,27 @@ include_once("Models/peticionesSql.php");
           <div class="card-body">
             <form  method="post"  class="row g-3">
               <div>
-                <label for="inputEmail4" class="form-label">Email</label>
+                <label for="registrarEmail" class="form-label">Email</label>
                 <input type="email" name="usuario" class="form-control" id="registrarEmail">
               </div>
               <div>
-                <label for="inputPassword4" class="form-label">Password</label>
+                <label for="registrarPassword" class="form-label">Password</label>
                 <input type="password" name="password" class="form-control" id="registrarPassword">
               </div>
               <div>
-                <label for="nombreLabel" class="form-label">Nombre</label>
+                <label for="registrarNombre" class="form-label">Nombre</label>
                 <input type="text" name="nombre" class="form-control" id="registrarNombre">
               </div>
               <div>
-                <label for="apellidoLabel" class="form-label">Apellido</label>
+                <label for="registrarApellido" class="form-label">Apellido</label>
                 <input type="text" name="apellido" class="form-control" id="registrarApellido">
               </div>
               <div>
-                <label for="edadLabel" class="form-label">Edad</label>
+                <label for="registrarEdad" class="form-label">Edad</label>
                 <input type="text" name="edad" class="form-control" id="registrarEdad">
               </div>
               <div>
-                <label for="dniLabel" class="form-label">Dni</label>
+                <label for="registrarDni" class="form-label">Dni</label>
                 <input type="text" name="dni" class="form-control" id="registrarDni">
               </div>
               <div class="mb-3">
@@ -51,9 +51,11 @@ include_once("Models/peticionesSql.php");
               <?php
                
                 if (isset($_POST['Registrate'])) {
-                  $ingresarRegistro = mysqli_query($conectarDB, $insertarPersona);
+                  //$ingresarPersona = mysqli_query($conectarDB, $insertarPersona);
+                  //$idPersona = $conectarDB->insert_id;
                   $ingresarRegistro = mysqli_query($conectarDB, $registroUsuario);
-                  header('location: Views/listado.php');
+                  $idUsuario = $conectarDB->insert_id;
+                  header('location: Views/login.php');
                 }
                 ?>
             </form>
