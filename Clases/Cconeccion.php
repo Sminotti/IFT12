@@ -15,6 +15,7 @@ class Cconeccion
         if ($conectarDB->connect_error) {
             echo "Fallo la coneccion con la base de datos: " . $conectarDB->connect_error;
             exit();
+      
         }
 
         return $conectarDB;

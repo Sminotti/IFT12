@@ -30,6 +30,8 @@ $idPersona = $_GET['idPersona'] ?? null;
             <input type="text" name="apellido" value="<?php echo $row["apellido"]; ?>" class="mt-2 form-control">
             <input type="text" name="edad" value="<?php echo $row["edad"]; ?>" class="mt-2 form-control">
             <input type="text" name="dni" value="<?php echo $row["dni"]; ?>" class="mt-2 form-control">
+            <input type="text" name="usuario" value="<?php echo $row["usuario"]; ?>" class="mt-2 form-control">
+            <input type="text" name="clave" value="<?php echo $row["clave"]; ?>" class="mt-2 form-control">
             <button type="submit" name="modificar" class="mt-2 btn btn-primary form-control">Aceptar cambios</button>
             <?php
             // Modificar persona

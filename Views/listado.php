@@ -27,11 +27,14 @@ $idPersona = $_GET['idPersona'] ?? null;
                 <input type="text" name="apellido" placeholder="apellido" class="mt-2 form-control">
                 <input type="text" name="edad" placeholder="edad" class="mt-2 form-control">
                 <input type="text" name="dni" placeholder="dni" class="mt-2 form-control">
+                <input type="text" name="usuario" placeholder="usuario" class="mt-2 form-control">
+                <input type="text" name="clave" placeholder="clave" class="mt-2 form-control">
+                
                 <button type="submit" name="enviar" class="mt-2 btn btn-primary form-control">Crear persona</button>
                 <?php
                 // Crear persona
                 if (isset($_POST['enviar'])) {
-                  $ingresarRegistro = mysqli_query($conectarDB, $insertarPersona);
+                  $ingresarRegistro = mysqli_query($conectarDB, $registroUsuario);
                 }
                 ?>
                 <?php
@@ -52,6 +55,7 @@ $idPersona = $_GET['idPersona'] ?? null;
                     <th scope="col">Apellido</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Dni</th>
+                
            
                     <th scope="col"></th>
                   </tr>
@@ -69,7 +73,8 @@ $idPersona = $_GET['idPersona'] ?? null;
                       <td><?php echo $row["apellido"]; ?></td>
                       <td><?php echo $row["edad"]; ?></td>
                       <td><?php echo $row["dni"]; ?></td>
-                
+              
+
                       <td>
                         <!-- Button modal editar-->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php  echo $row["idPersona"]; ?>">  Modal </button>

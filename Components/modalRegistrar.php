@@ -3,6 +3,7 @@
 include_once("Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("Models/peticionesSql.php");
+$idObtenido = 0;
 ?>
 
 
@@ -18,16 +19,17 @@ include_once("Models/peticionesSql.php");
         <div class="card " style="width: 300px; height: auto ">
           <div class="card-header">
             Ingresa tus datos y registrate
+            <?php echo 'el id obtenido es: ' . $idObtenido ?>
           </div>
           <div class="card-body">
-            <form  method="post"  class="row g-3">
+            <form method="post" class="row g-3">
               <div>
                 <label for="registrarEmail" class="form-label">Email</label>
                 <input type="email" name="usuario" class="form-control" id="registrarEmail">
               </div>
               <div>
                 <label for="registrarPassword" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="registrarPassword">
+                <input type="password" name="clave" class="form-control" id="registrarClave">
               </div>
               <div>
                 <label for="registrarNombre" class="form-label">Nombre</label>
@@ -49,17 +51,23 @@ include_once("Models/peticionesSql.php");
                 <button type="submit" name="Registrate" class="btn btn-primary form-control">Registrarse</button>
               </div>
               <?php
-               
-                if (isset($_POST['Registrate'])) {
-                  //$ingresarPersona = mysqli_query($conectarDB, $insertarPersona);
-                  //$idPersona = $conectarDB->insert_id;
-                  $ingresarRegistro = mysqli_query($conectarDB, $registroUsuario);
-                  $idUsuario = $conectarDB->insert_id;
-                  header('location: Views/login.php');
+
+              if (isset($_POST['Registrate'])) {
+
+                $ingresarRegistro = mysqli_query($conectarDB, $registroUsuario);
+
+                $filasAfectadas = mysqli_affected_rows($conectarDB);
+                if ($filasAfectadas > 0) {
+                  $idObtenido = mysqli_insert_id($conectarDB);
+                  echo 'id Obetenido es: ' . $idObtenido;
+                } else {
+                  echo 'No se pudo registrar el usuario';
                 }
-                ?>
+                //header('location: Views/login.php');
+              }
+              ?>
             </form>
-     
+
           </div>
         </div>
       </div>

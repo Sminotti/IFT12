@@ -36,7 +36,7 @@ $password = $_POST['password'] ?? NULL;
       </div>
       <div>
         <label for="inputPassword4" class="form-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword4" name="password">
+        <input type="password" class="form-control" id="inputPassword4" name="clave">
       </div>
       <div class="mb-3">
         <button type="submit" name="login" class="btn btn-primary form-control">Ingrese</button>
