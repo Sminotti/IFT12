@@ -11,7 +11,9 @@
     // LOGIN //
     $login = "SELECT usuario,clave FROM usuario WHERE usuario=$usuario AND clave=$clave AND habilitado=1 AND eliminado = 0";
     // REGISTRO DE USUARIO //
-    $registroUsuario = "INSERT INTO persona,usuario (nombre,apellido,edad,dni,usuario,clave) VALUES ('$usuario','$clave','$nombre','$apellido','$edad','$dni') ";
+    $crearPersona = "INSERT INTO persona (nombre,apellido,edad,dni) VALUES ('$nombre','$apellido','$edad','$dni') ";
+    // CREAR USUARIO Y CONTRASEÑA
+   // $crearUsuario = "INSERT INTO usuario (usuario,clave,idPersona) VALUES ('$usuario','$clave','$idObtenido')";
     // LISTAR REGISTROS PERSONAS//
     $listar = "SELECT idPersona,apellido,nombre,edad,dni FROM persona WHERE habilitado=1 AND eliminado = 0 ORDER BY idPersona DESC ";
     // EDITAR REGISTRO PERSONAS//

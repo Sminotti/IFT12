@@ -24,6 +24,7 @@ $idObtenido = 0;
           <div class="card-body">
             <form method="post" class="row g-3">
               <div>
+                <input type="text" name="idPersona" id="idPersona" style="display: none;">
                 <label for="registrarEmail" class="form-label">Email</label>
                 <input type="email" name="usuario" class="form-control" id="registrarEmail">
               </div>
@@ -54,14 +55,16 @@ $idObtenido = 0;
 
               if (isset($_POST['Registrate'])) {
 
-                $ingresarRegistro = mysqli_query($conectarDB, $registroUsuario);
+                $ingresarPersona = mysqli_query($conectarDB, $crearPersona);
+               // $filasAfectadas = mysqli_affected_rows($conectarDB);
+                $idObtenido = mysqli_insert_id($conectarDB);
 
-                $filasAfectadas = mysqli_affected_rows($conectarDB);
-                if ($filasAfectadas > 0) {
-                  $idObtenido = mysqli_insert_id($conectarDB);
-                  echo 'id Obetenido es: ' . $idObtenido;
+                if (isset($idObtenido) ) {
+                  $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idObtenido', '$usuario', '$clave')";
+                  $ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
+                  echo "Usuario creado exitosamente : " . $idObtenido ;
                 } else {
-                  echo 'No se pudo registrar el usuario';
+                  echo "<script>alert('Error al crear usuario.');</script>";
                 }
                 //header('location: Views/login.php');
               }
