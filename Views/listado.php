@@ -20,17 +20,18 @@ $idPersona = $_GET['idPersona'] ?? null;
       <div class="card-body">
         <div class="container text-center ">
           <div class="row">
-            <div class=" col-3 "><!--Formulario Crear persona -->
+            <div class=" col-3 "><!--Formulario Crear empleado -->
               <h5 class="alert alert-secondary text-bg-dark">Ingrese sus datos</h5>
               <form method="post" class="d-grid bg-dark p-2 rounded">
                 <input type="text" name="nombre" placeholder="nombre" class=" form-control">
                 <input type="text" name="apellido" placeholder="apellido" class="mt-2 form-control">
                 <input type="text" name="edad" placeholder="edad" class="mt-2 form-control">
                 <input type="text" name="dni" placeholder="dni" class="mt-2 form-control">
+                <input type="text" name="cargo" placeholder="cargo" class="mt-2 form-control">
+                <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
                 <input type="text" name="usuario" placeholder="usuario" class="mt-2 form-control">
-                <input type="text" name="clave" placeholder="clave" class="mt-2 form-control">
-                
-                <button type="submit" name="enviar" class="mt-2 btn btn-primary form-control">Crear persona</button>
+
+                <button type="submit" name="enviar" class="mt-2 btn btn-primary form-control">Crear empleado</button>
                 <?php
                 // Crear persona
                 if (isset($_POST['enviar'])) {
@@ -55,9 +56,10 @@ $idPersona = $_GET['idPersona'] ?? null;
                     <th scope="col">Apellido</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Dni</th>
-                
-           
-                    <th scope="col"></th>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Legajo</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Acciones</th>
                   </tr>
                 </thead>
 
@@ -73,11 +75,12 @@ $idPersona = $_GET['idPersona'] ?? null;
                       <td><?php echo $row["apellido"]; ?></td>
                       <td><?php echo $row["edad"]; ?></td>
                       <td><?php echo $row["dni"]; ?></td>
-              
-
+                      <td><?php echo $row["cargo"]; ?></td>
+                      <td><?php echo $row["legajo"]; ?></td>
+                      <td><?php echo $row["usuario"]; ?></td>
                       <td>
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php  echo $row["idPersona"]; ?>">  Modal </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php echo $row["idPersona"]; ?>"> Modal </button>
                         <!-- Button eliminar-->
                         <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
@@ -85,7 +88,7 @@ $idPersona = $_GET['idPersona'] ?? null;
                       </td>
                     </tr>
                   <?php } ?>
-                </tbody>           
+                </tbody>
               </table>
             </div>
           </div>

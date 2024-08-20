@@ -48,6 +48,14 @@ $idObtenido = 0;
                 <label for="registrarDni" class="form-label">Dni</label>
                 <input type="text" name="dni" class="form-control" id="registrarDni">
               </div>
+              <div>
+                <label for="registrarCargo" class="form-label">Cargo</label>
+                <input type="text" name="cargo" class="form-control" id="registrarEdad">
+              </div>
+              <div>
+                <label for="registrarLegajo" class="form-label">Legajo</label>
+                <input type="text" name="legajo" class="form-control" id="registrarDni">
+              </div>
               <div class="mb-3">
                 <button type="submit" name="Registrate" class="btn btn-primary form-control">Registrarse</button>
               </div>
@@ -56,17 +64,17 @@ $idObtenido = 0;
               if (isset($_POST['Registrate'])) {
 
                 $ingresarPersona = mysqli_query($conectarDB, $crearPersona);
-               // $filasAfectadas = mysqli_affected_rows($conectarDB);
-                $idObtenido = mysqli_insert_id($conectarDB);
+                $idPersonaObtenido = mysqli_insert_id($conectarDB);
 
-                if (isset($idObtenido) ) {
+                if (isset($idPersonaObtenido)) {
+
                   $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idObtenido', '$usuario', '$clave')";
                   $ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
-                  echo "Usuario creado exitosamente : " . $idObtenido ;
+                  $idUsuarioObtenido = mysqli_insert_id($conectarDB);
+                  echo "Usuario creado exitosamente : " . $idPersonaObtenido;
                 } else {
                   echo "<script>alert('Error al crear usuario.');</script>";
                 }
-                //header('location: Views/login.php');
               }
               ?>
             </form>

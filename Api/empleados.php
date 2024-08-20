@@ -11,10 +11,7 @@ $idPersona = $_GET['idPersona'] ?? null;
 
 // Listar personas
 $listarRegistros = mysqli_query($conectarDB, $listar);
-//$registros =mysqli_fetch_array($listarRegistros);
-// $mostrarRegistros = json_encode($registros);
 $registros = mysqli_fetch_all($listarRegistros, MYSQLI_ASSOC);
-//$registros =mysqli_fetch_assoc($listarRegistros);
 echo json_encode($registros);
 
 if (isset($idPersona)) {
@@ -26,5 +23,6 @@ if (isset($idPersona)) {
   $editarPersona = mysqli_query($conectarDB, $editar);
   // eliminar persona
   $eliminarPersona = mysqli_query($conectarDB, $eliminar);
+  
 }
 
