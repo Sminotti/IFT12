@@ -23,14 +23,13 @@ $idPersona = $_GET['idPersona'] ?? null;
             <div class=" col-3 "><!--Formulario Crear empleado -->
               <h5 class="alert alert-secondary text-bg-dark">Ingrese sus datos</h5>
               <form method="post" class="d-grid bg-dark p-2 rounded">
+                <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
+                <input type="text" name="usuario" placeholder="usuario" class="mt-2 form-control">
                 <input type="text" name="nombre" placeholder="nombre" class=" form-control">
                 <input type="text" name="apellido" placeholder="apellido" class="mt-2 form-control">
                 <input type="text" name="edad" placeholder="edad" class="mt-2 form-control">
                 <input type="text" name="dni" placeholder="dni" class="mt-2 form-control">
                 <input type="text" name="cargo" placeholder="cargo" class="mt-2 form-control">
-                <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
-                <input type="text" name="usuario" placeholder="usuario" class="mt-2 form-control">
-
                 <button type="submit" name="enviar" class="mt-2 btn btn-primary form-control">Crear empleado</button>
                 <?php
                 // Crear persona
@@ -52,13 +51,13 @@ $idPersona = $_GET['idPersona'] ?? null;
                 <thead>
                   <tr class="table-dark rounded">
                     <th scope="col">#</th>
+                    <th scope="col">Legajo</th>
+                    <th scope="col">Usuario</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Apellido</th>
                     <th scope="col">Edad</th>
                     <th scope="col">Dni</th>
                     <th scope="col">Cargo</th>
-                    <th scope="col">Legajo</th>
-                    <th scope="col">Usuario</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
@@ -67,17 +66,17 @@ $idPersona = $_GET['idPersona'] ?? null;
 
                   <?php
                   // Listar personas
-                  $listarRegistros = mysqli_query($conectarDB, $listar);
+                  $listarRegistros = mysqli_query($conectarDB, $listarEmpleados);
                   while ($row = mysqli_fetch_array($listarRegistros)) { ?>
                     <tr class="text-center">
                       <td><?php echo $row["idPersona"]; ?></td>
+                      <td><?php echo $row["legajo"]; ?></td>
+                      <td><?php echo $row["usuario"]; ?></td>
                       <td><?php echo $row["nombre"]; ?></td>
                       <td><?php echo $row["apellido"]; ?></td>
                       <td><?php echo $row["edad"]; ?></td>
                       <td><?php echo $row["dni"]; ?></td>
                       <td><?php echo $row["cargo"]; ?></td>
-                      <td><?php echo $row["legajo"]; ?></td>
-                      <td><?php echo $row["usuario"]; ?></td>
                       <td>
                         <!-- Button modal editar-->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php echo $row["idPersona"]; ?>"> Modal </button>
