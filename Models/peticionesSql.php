@@ -11,8 +11,9 @@ $legajo = $_POST['legajo'] ?? null;
 $cargo = $_POST['cargo'] ?? null;
 //$password = password_hash($_POST['password'], PASSWORD_BCRYPT,['cost' => 10])?? null;// buscar otra forma no deprecated...
 $clave = $_POST['clave'] ?? null;
-$idUsuario = $_POST['idUsuario']; // para crear empleado
-$idCargo = $_POST['idCargo']; // para crear empleado
+$idUsuario = $_POST['idUsuario'] ?? null; // para crear empleado
+$idCargo = $_POST['idCargo'] ?? null; // para crear empleado
+$idEmpleado = $_GET['idEmpleado'] ?? null;
 
 //-------------------------------------SENTENCIAS----------------------------------------------------------------------------------------------------------------//
 // LOGIN //
@@ -25,20 +26,20 @@ $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$i
 $listarPersona = "SELECT idPersona,apellido,nombre,edad,dni FROM persona WHERE habilitado=1 AND eliminado = 0 ORDER BY idPersona DESC ";
 // EMPLEADOS
 $listarEmpleados = "SELECT persona.legajo,persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario
-FROM empleado 
+FROM empleado,persona,cargo,usuario 
 INNER JOIN persona ON empleado.idPersona = persona.idPersona 
 INNER JOIN cargo ON empleado.idCargo  = cargo.idCargo 
 INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
-WHERE empleado.habilitado=1 AND empleado.eliminado = 0 ORDER BY persona.legajo DESC ";
+WHERE empleado.habilitado=1 AND empleado.eliminado = 0 ORDER BY empleado.idEmpleado DESC ";
 // LISTAR CARGO
 $listarCargo = "SELECT idCargo,cargo FROM cargo WHERE habilitado=1, eliminado=0";
 // EDITAR REGISTRO PERSONAS//
-$listarRegistro = "SELECT persona.legajo,persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario
+$listarRegistro = "SELECT persona.idPersona, persona.legajo,persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario
 FROM empleado 
 INNER JOIN persona ON empleado.idPersona = persona.idPersona 
 INNER JOIN cargo ON empleado.idCargo  = cargo.idCargo 
 INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
-WHERE idPersona='$idPersona' empleado.habilitado=1 AND empleado.eleminado=0 AND";
+WHERE idEmpleado='$idEmpleado' AND empleado.habilitado=1 AND empleado.eleminado=0 AND";
 $editar = "UPDATE persona,usuario SET nombre='$nombre',apellido='$apellido',edad='$edad',dni='$dni' ,usuario='$usuario',clave='$clave'";
 
 // ELIMINAR REGISTRO PERSONAS//

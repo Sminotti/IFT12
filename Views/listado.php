@@ -2,7 +2,7 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-$idPersona = $_GET['idPersona'] ?? null;
+//$idPersona = $_GET['idPersona'] ?? null;
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ $idPersona = $_GET['idPersona'] ?? null;
               <form method="post" class="d-grid bg-dark p-2 rounded">
                 <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
                 <input type="text" name="usuario" placeholder="usuario" class="mt-2 form-control">
-                <input type="text" name="nombre" placeholder="nombre" class=" form-control">
+                <input type="text" name="nombre" placeholder="nombre" class=" mt-2 form-control">
                 <input type="text" name="apellido" placeholder="apellido" class="mt-2 form-control">
                 <input type="text" name="edad" placeholder="edad" class="mt-2 form-control">
                 <input type="text" name="dni" placeholder="dni" class="mt-2 form-control">
@@ -34,7 +34,7 @@ $idPersona = $_GET['idPersona'] ?? null;
                 <?php
                 // Crear persona
                 if (isset($_POST['enviar'])) {
-                  $ingresarRegistro = mysqli_query($conectarDB, $registroUsuario);
+                  $ingresarRegistro = mysqli_query($conectarDB, $crearEmpleado);
                 }
                 ?>
                 <?php
@@ -69,7 +69,7 @@ $idPersona = $_GET['idPersona'] ?? null;
                   $listarRegistros = mysqli_query($conectarDB, $listarEmpleados);
                   while ($row = mysqli_fetch_array($listarRegistros)) { ?>
                     <tr class="text-center">
-                      <td><?php echo $row["idPersona"]; ?></td>
+                      <td><?php echo $row["idEmpleado"]; ?></td>
                       <td><?php echo $row["legajo"]; ?></td>
                       <td><?php echo $row["usuario"]; ?></td>
                       <td><?php echo $row["nombre"]; ?></td>
@@ -79,11 +79,11 @@ $idPersona = $_GET['idPersona'] ?? null;
                       <td><?php echo $row["cargo"]; ?></td>
                       <td>
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php echo $row["idPersona"]; ?>"> Modal </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php echo $row["idEmpleado"]; ?>"> Modal </button>
                         <!-- Button eliminar-->
-                        <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
+                        <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
-                        <a class="btn btn-danger" href="../Views/eliminar.php?idPersona=<?php echo $row["idPersona"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
+                        <a class="btn btn-danger" href="../Views/eliminar.php?idPersona=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
                       </td>
                     </tr>
                   <?php } ?>
