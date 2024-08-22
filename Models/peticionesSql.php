@@ -25,12 +25,12 @@ $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$i
 // LISTAR REGISTROS PERSONAS//
 $listarPersona = "SELECT idPersona,apellido,nombre,edad,dni FROM persona WHERE habilitado=1 AND eliminado = 0 ORDER BY idPersona DESC ";
 // EMPLEADOS
-$listarEmpleados = "SELECT persona.legajo,persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario
-FROM empleado,persona,cargo,usuario 
+$listarEmpleados = "SELECT persona.idPersona, empleado.idEmpleado, persona.legajo, persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario
+FROM empleado
 INNER JOIN persona ON empleado.idPersona = persona.idPersona 
 INNER JOIN cargo ON empleado.idCargo  = cargo.idCargo 
 INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
-WHERE empleado.habilitado=1 AND empleado.eliminado = 0 ORDER BY empleado.idEmpleado DESC ";
+WHERE empleado.habilitado=1 AND empleado.eliminado = 0 ORDER BY empleado.idEmpleado ASC ";
 // LISTAR CARGO
 $listarCargo = "SELECT idCargo,cargo FROM cargo WHERE habilitado=1, eliminado=0";
 // EDITAR REGISTRO PERSONAS//

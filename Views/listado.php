@@ -21,7 +21,7 @@ include_once("../Models/peticionesSql.php");
         <div class="container text-center ">
           <div class="row">
             <div class=" col-3 "><!--Formulario Crear empleado -->
-              <h5 class="alert alert-secondary text-bg-dark">Ingrese sus datos</h5>
+              <h5 class="alert alert-secondary text-bg-dark">Ingrese empleado</h5>
               <form method="post" class="d-grid bg-dark p-2 rounded">
                 <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
                 <input type="text" name="usuario" placeholder="usuario" class="mt-2 form-control">
