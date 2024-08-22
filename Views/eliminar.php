@@ -2,7 +2,7 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-$idPersona = $_GET['idPersona'] ?? null;
+$idPersona = $_GET['idEmpleado'] ?? null;
 ?>
 
 <?php

@@ -79,11 +79,11 @@ include_once("../Models/peticionesSql.php");
                       <td><?php echo $row["cargo"]; ?></td>
                       <td>
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idPersona=<?php echo $row["idEmpleado"]; ?>"> Modal </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> Modal </button>
                         <!-- Button eliminar-->
-                        <a class="btn btn-primary" href="../Views/modificar.php?idPersona=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
+                        <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
-                        <a class="btn btn-danger" href="../Views/eliminar.php?idPersona=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
+                        <a class="btn btn-danger" href="../Views/eliminar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
                       </td>
                     </tr>
                   <?php } ?>

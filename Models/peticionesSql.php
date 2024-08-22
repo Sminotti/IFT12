@@ -33,14 +33,19 @@ INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
 WHERE empleado.habilitado=1 AND empleado.eliminado = 0 ORDER BY empleado.idEmpleado ASC ";
 // LISTAR CARGO
 $listarCargo = "SELECT idCargo,cargo FROM cargo WHERE habilitado=1, eliminado=0";
-// EDITAR REGISTRO PERSONAS//
-$listarRegistro = "SELECT persona.idPersona, persona.legajo,persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario
-FROM empleado 
+// EDITAR EMPLEADOS//
+$listarEmpleado =  "SELECT persona.idPersona, empleado.idEmpleado, persona.legajo, persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario, usuario.clave
+FROM empleado
 INNER JOIN persona ON empleado.idPersona = persona.idPersona 
 INNER JOIN cargo ON empleado.idCargo  = cargo.idCargo 
 INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
-WHERE idEmpleado='$idEmpleado' AND empleado.habilitado=1 AND empleado.eleminado=0 AND";
-$editar = "UPDATE persona,usuario SET nombre='$nombre',apellido='$apellido',edad='$edad',dni='$dni' ,usuario='$usuario',clave='$clave'";
+WHERE idEmpleado='$idEmpleado' AND empleado.habilitado=1 AND empleado.eliminado=0";
+// Actualizar tabla persona
+$updatePersona = "UPDATE persona SET nombre='$nombre', apellido='$apellido', edad='$edad', dni='$dni' WHERE idPersona='$idPersona'";
+// Actualizar tabla usuario
+$updateUsuario = "UPDATE usuario SET usuario='$usuario', clave='$clave' WHERE idUsuario='$idUsuario'";
+// Actualizar tabla cargo
+$updateCargo = "UPDATE cargo SET cargo='$cargo' WHERE idCargo='$idCargo'";
 
 // ELIMINAR REGISTRO PERSONAS//
-$eliminar = "UPDATE persona SET habilitado=0 ,eliminado=1 WHERE idPersona='$idPersona'";
+$eliminar = "UPDATE empleado SET habilitado=0 ,eliminado=1 WHERE idEmpleado='$idEmpleado'";
