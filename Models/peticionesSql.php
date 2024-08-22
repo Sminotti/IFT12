@@ -33,8 +33,8 @@ INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
 WHERE empleado.habilitado=1 AND empleado.eliminado = 0 ORDER BY empleado.idEmpleado ASC ";
 // LISTAR CARGO
 $listarCargo = "SELECT idCargo,cargo FROM cargo WHERE habilitado=1, eliminado=0";
-// EDITAR EMPLEADOS//
-$listarEmpleado =  "SELECT persona.idPersona, empleado.idEmpleado, persona.legajo, persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario, usuario.clave
+// EDITAR EMPLEADOS---------------------------------------------------------------------------------------------------------//
+$listarEmpleado = "SELECT persona.idPersona, empleado.idEmpleado, persona.legajo, persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario, usuario.clave
 FROM empleado
 INNER JOIN persona ON empleado.idPersona = persona.idPersona 
 INNER JOIN cargo ON empleado.idCargo  = cargo.idCargo 
@@ -46,6 +46,7 @@ $updatePersona = "UPDATE persona SET nombre='$nombre', apellido='$apellido', eda
 $updateUsuario = "UPDATE usuario SET usuario='$usuario', clave='$clave' WHERE idUsuario='$idUsuario'";
 // Actualizar tabla cargo
 $updateCargo = "UPDATE cargo SET cargo='$cargo' WHERE idCargo='$idCargo'";
+// EDITAR EMPLEADOS---------------------------------------------------------------------------------------------------------//
 
 // ELIMINAR REGISTRO PERSONAS//
 $eliminar = "UPDATE empleado SET habilitado=0 ,eliminado=1 WHERE idEmpleado='$idEmpleado'";

@@ -26,7 +26,7 @@ $idPersona = $_GET['idEmpleado'] ?? null;
         $listarRegistro = mysqli_query($conectarDB, $listarEmpleado);
         while ($row = mysqli_fetch_array($listarRegistro)) { ?>
           <form method="post" class="d-grid bg-dark p-2 rounded">
-          <input type="text" name="legajo" value="<?php echo $row["legajo"]; ?>" class=" form-control">
+            <input type="text" name="legajo" value="<?php echo $row["legajo"]; ?>" class=" form-control">
             <input type="text" name="nombre" value="<?php echo $row["nombre"]; ?>" class=" mt-2 form-control">
             <input type="text" name="apellido" value="<?php echo $row["apellido"]; ?>" class="mt-2 form-control">
             <input type="text" name="edad" value="<?php echo $row["edad"]; ?>" class="mt-2 form-control">
@@ -38,7 +38,13 @@ $idPersona = $_GET['idEmpleado'] ?? null;
             // Modificar empleado
             if (isset($_POST['modificar'])) {
               $modificarRegistro = mysqli_query($conectarDB, $editar);
-              header('location: listado.php');
+              if ($idEmpleado) {
+                
+                echo "<script>alert('Registro modificado con exito')</script>";
+                header('location: listado.php');
+              } else {
+                echo "<script>alert('Error al modificar')</script>";
+              }
             }
             ?>
           </form>

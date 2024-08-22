@@ -15,7 +15,7 @@ include_once("../Models/peticionesSql.php");
   <?php include_once("../Template/navBar.php"); ?>
 
   <div class="centrar">
-    <div class="mt-5 card col-9">
+    <div class="mt-5 card col-10">
       <h5 class="card-header">Personal</h5>
       <div class="card-body">
         <div class="container text-center ">
@@ -46,7 +46,7 @@ include_once("../Models/peticionesSql.php");
               </form>
             </div>
 
-            <div class="col"> <!--Tabla de datos -->
+            <div class="col-9"> <!--Tabla de datos -->
               <table class="table text-center">
                 <thead>
                   <tr class="table-dark rounded">
