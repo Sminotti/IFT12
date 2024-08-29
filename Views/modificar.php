@@ -2,7 +2,10 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-$idPersona = $_GET['idEmpleado'] ?? null;
+$idPersona = $_GET['idPersona'] ?? null;
+$idUsuario = $_GET['idUsuario'] ?? null;
+$idCargo = $_GET['idCargo'] ?? null;
+$idEmpleado = $_GET['idEmpleado'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -26,22 +29,53 @@ $idPersona = $_GET['idEmpleado'] ?? null;
         $listarRegistro = mysqli_query($conectarDB, $listarEmpleado);
         while ($row = mysqli_fetch_array($listarRegistro)) { ?>
           <form method="post" class="d-grid bg-dark p-2 rounded">
-            <input type="text" name="legajo" value="<?php echo $row["legajo"]; ?>" class=" form-control">
-            <input type="text" name="nombre" value="<?php echo $row["nombre"]; ?>" class=" mt-2 form-control">
-            <input type="text" name="apellido" value="<?php echo $row["apellido"]; ?>" class="mt-2 form-control">
-            <input type="text" name="edad" value="<?php echo $row["edad"]; ?>" class="mt-2 form-control">
-            <input type="text" name="dni" value="<?php echo $row["dni"]; ?>" class="mt-2 form-control">
-            <input type="text" name="usuario" value="<?php echo $row["usuario"]; ?>" class="mt-2 form-control">
-            <input type="text" name="clave" value="<?php echo $row["clave"]; ?>" class="mt-2 form-control">
+            <!-- OBTENER LOS ID -------------------------------------------------------------------------------------------------------->
+            <input type="text" name="idPersona" value="<?php echo $row["idPersona"]; ?>" style="display: none;">
+            <input type="text" name="idUsuario" value="<?php echo $row["idUsuario"]; ?>" style="display: none;">
+            <input type="text" name="idCargo" value="<?php echo $row["idCargo"]; ?>" style="display: none;">
+            <input type="text" name="idEmpleado" value="<?php echo $row["idEmpleado"]; ?>" style="display: none;">
+            <!-- OBTENER LOS ID -------------------------------------------------------------------------------------------------------->
+            <input type="text" name="legajo" placeholder="Legajo" disabled value="<?php echo $row["legajo"]; ?>" class=" form-control">
+            <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $row["nombre"]; ?>" class=" mt-2 form-control">
+            <input type="text" name="apellido" placeholder="Apellido" value="<?php echo $row["apellido"]; ?>" class="mt-2 form-control">
+            <input type="text" name="edad" placeholder="edad" value="<?php echo $row["edad"]; ?>" class="mt-2 form-control">
+            <input type="text" name="dni" placeholder="Dni" value="<?php echo $row["dni"]; ?>" class="mt-2 form-control">
+            <input type="text" name="usuario" placeholder="Usuario" value="<?php echo $row["usuario"]; ?>" class="mt-2 form-control">
+            <input type="text" name="clave" placeholder="Clave" value="<?php echo $row["clave"]; ?>" class="mt-2 form-control">
             <button type="submit" name="modificar" class="mt-2 btn btn-primary form-control">Aceptar cambios</button>
             <?php
             // Modificar empleado
             if (isset($_POST['modificar'])) {
-              $modificarRegistro = mysqli_query($conectarDB, $editar);
+
               if ($idEmpleado) {
+                // Actualizar tabla persona
+                $updatePersona = "UPDATE persona SET nombre=?, apellido=?, edad=?, dni=? WHERE idPersona=?";
+                $stmtPersona = $conectarDB->prepare($updatePersona);
+                $stmtPersona->bind_param("ssssi", $nombre, $apellido, $edad, $dni, $idPersona);
+                if (!$stmtPersona->execute()) {
+                  echo "Error al actualizar tabla persona: " . $stmtPersona->error;
+                }
                 
+                // Actualizar tabla cargo
+                $updateCargo = "UPDATE cargo SET cargo=? WHERE idCargo=?";
+                $stmtCargo = $conectarDB->prepare($updateCargo);
+                $stmtCargo->bind_param("si", $cargo, $idCargo);
+                if (!$stmtCargo->execute()) {
+                  echo "Error al actualizar tabla cargo: " . $stmtCargo->error;
+                }
+
+                // Actualizar tabla usuario
+                /*$updateUsuario = "UPDATE usuario SET usuario=?, clave=? WHERE idPersona=?";
+                $stmtUsuario = $conectarDB->prepare($updateUsuario);
+                $stmtUsuario->bind_param("sssi", $usuario, $clave, $idPersona);
+                if (!$stmtUsuario->execute()) {
+                  echo "Error al actualizar tabla usuario: " . $stmtUsuario->error;
+                }*/
+
+                if ($stmtPersona->affected_rows > 0 && $stmtUsuario->affected_rows > 0 && $stmtCargo->affected_rows > 0) {
                 echo "<script>alert('Registro modificado con exito')</script>";
                 header('location: listado.php');
+                }
               } else {
                 echo "<script>alert('Error al modificar')</script>";
               }

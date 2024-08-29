@@ -13,8 +13,8 @@
           </div>
           <div class="card-body">
             <?php
-            // Lista persona para editar
-            $listarRegistro = mysqli_query($conectarDB, $listarRegistro);
+            // Lista empleado para editar
+            $listarRegistro = mysqli_query($conectarDB, $listarEmpleado);
             while ($row = mysqli_fetch_array($listarRegistro)) { ?>
               <form method="post" class="d-grid bg-dark p-2 rounded">
                 <input type="text" name="nombre" value="<?php echo $row["nombre"]; ?>" class=" form-control">
@@ -23,7 +23,7 @@
                 <input type="text" name="dni" value="<?php echo $row["dni"]; ?>" class="mt-2 form-control">
                 <button type="submit" name="modificar" class="mt-2 btn btn-primary form-control">Aceptar cambios</button>
                 <?php
-                // Modificar persona
+                // Modificar empleado
                 if (isset($_POST['modificar'])) {
                   $modificarRegistro = mysqli_query($conectarDB, $editar);
                   header('location: listado.php');

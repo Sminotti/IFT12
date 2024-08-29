@@ -18,80 +18,84 @@ $idObtenido = 0;
       <div class="modal-body d-flex justify-content-center">
         <div class="card " style="width: 100%; height: auto ">
           <div class="card-header">
+            <h5 class="card-title text-center">Ingrese datos del nuevo empleado</h5>
           </div>
           <div class="card-body">
-            <form method="post" class="row g-3">
-              <div>
-                <input type="text" name="idPersona" id="idPersona" style="display: none;">
-                <label for="registrarEmail" class="form-label">Email</label>
-                <input type="email" name="usuario" id="registrarEmail">
-                <label for="registrarPassword" class="form-label">Password</label>
-                <input type="password" name="clave" id="registrarClave">
+            <form method="post">
+              <div class="d-grid gap-3">
+
+                <div class="p-2 bg-light border">
+                  <input type="text" name="idPersona" id="idPersona" style="display: none;">
+
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">Email</span>
+                    <input type="email" name="usuario" class="form-control" placeholder="Nombre de usuario" id="registrarEmail" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="basic-addon1">Password</span>
+                    <input type="password" name="clave" class="form-control" placeholder="Inegrese password" id="registrarClave" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
+                  </div>
+                </div>
+                <div class="p-2 bg-light border">
+                  <div class="input-group">
+                    <span class="input-group-text" id="basic-addon1">Nombre</span>
+                    <input type="text" name="nombre" class="form-control" id="registrarNombre" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="basic-addon1">Apellido</span>
+                    <input type="text" name="apellido" class="form-control" id="registrarApellido" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="basic-addon1">Edad</span>
+                    <input type="text" name="edad" class="form-control" id="registrarEdad" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
+                    <span class="input-group-text" id="basic-addon1">Dni</span>
+                    <input type="text" name="dni" class="form-control" id="registrarDni" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
+                  </div>
+                </div>
+
+                <div class="p-2 bg-light border">
+                  <div class="input-group">
+                    <!-- LISTA DESPLEGABLE CARGAOS --------------------------------------->
+                    <span class="input-group-text" id="basic-addon1">Legajo</span>
+                    <input type="text" name="legajo" id="registrarDni">
+                    <span class="input-group-text" id="basic-addon1">Cargo a desempeñar</span>
+                    <select class="form-select btn btn-secondary" style="width: auto;">
+                    <?php
+                      $listarCargos = mysqli_query($conectarDB, $listarCargo);
+                      while ($row = mysqli_fetch_array($listarCargos)) { ?>
+                        <option value="<?php echo $row["idCargo"] ?>"><?php echo $row["cargo"] ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                </div>
+                <!-- LISTA DESPLEGABLE CARGAOS --------------------------------------->
+
+                <div class="p-2 bg-light border">
+                  <div class="input-group">
+                     <span class="input-group-text" id="basic-addon1">Legajo</span>
+                    <button type="submit" name="Registrate" class="btn btn-primary form-control">Registrar empleado</button>
+                  </div>
+                </div>
+
               </div>
 
-              <div>
-                <label for="registrarNombre" class="form-label">Nombre</label>
-                <input type="text" name="nombre" id="registrarNombre">
-                <label for="registrarApellido" class="form-label">Apellido</label>
-                <input type="text" name="apellido" id="registrarApellido">
-              </div>
-          </div>
-          <div>
-            <label for="registrarEdad" class="form-label">Edad</label>
-            <input type="text" name="edad" id="registrarEdad">
-            <label for="registrarDni">Dni</label>
-            <input type="text" name="dni" id="registrarDni">
-          </div>
-          <div>
-            <label for="registrarCargo" class="form-label">Cargo</label>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Selecione el cargo a ocupar
-              </button>
-              <ul class="dropdown-menu">
-                <?php
-                // Listar personas
-                $listarRegistros = mysqli_query($conectarDB, $listarEmpleados);
-                while ($row = mysqli_fetch_array($listarRegistros)) { ?>
-                  <li><a class="dropdown-item" ref="#">Action</a></li>
-                <?php } ?>
-              </ul>
-            </div>
-          </div>
-          <div>
-            <label for="registrarLegajo" class="form-label">Legajo</label>
-            <input type="text" name="legajo" class="form-control" id="registrarDni">
-          </div>
-          <div class="mb-3">
-            <button type="submit" name="Registrate" class="btn btn-primary form-control">Registrarse</button>
-          </div>
-          <?php
+              <?php
 
-          if (isset($_POST['Registrate'])) {
+              if (isset($_POST['Registrate'])) {
 
-            $ingresarPersona = mysqli_query($conectarDB, $crearPersona);
-            $idPersonaObtenido = mysqli_insert_id($conectarDB);
+                $ingresarPersona = mysqli_query($conectarDB, $crearPersona);
+                $idPersonaObtenido = mysqli_insert_id($conectarDB);
 
-            if (isset($idPersonaObtenido)) {
+                if (isset($idPersonaObtenido)) {
 
-              $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idObtenido', '$usuario', '$clave')";
-              $ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
-              $idUsuarioObtenido = mysqli_insert_id($conectarDB);
-              $crearEmpleado = mysqli_query($conectarDB, $crearEmpleado);
-              echo "Usuario creado exitosamente : " . $idPersonaObtenido;
-            } else {
-              echo "<script>alert('Error al crear usuario.');</script>";
-            }
-          }
-          ?>
-          </form>
-
+                  $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idObtenido', '$usuario', '$clave')";
+                  $ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
+                  $idUsuarioObtenido = mysqli_insert_id($conectarDB);
+                  $crearEmpleado = mysqli_query($conectarDB, $crearEmpleado);
+                  echo "<script>alert('Usuario'creado exitosamente);</script>";
+                } else {
+                  echo "<script>alert('Error al crear usuario.');</script>";
+                }
+              }
+              ?>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-    </div>
   </div>
-</div>
 </div>

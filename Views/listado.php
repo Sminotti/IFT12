@@ -18,9 +18,9 @@ include_once("../Models/peticionesSql.php");
     <div class="mt-5 card col-10">
       <h5 class="card-header">Personal</h5>
       <div class="card-body">
-        <div class="container text-center ">
+        <div class=" text-center ">
           <div class="row">
-            <div class=" col-3 "><!--Formulario Crear empleado -->
+            <div class=" col-2 "><!--Formulario Crear empleado -->
               <h5 class="alert alert-secondary text-bg-dark">Ingrese empleado</h5>
               <form method="post" class="d-grid bg-dark p-2 rounded">
                 <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
@@ -46,7 +46,7 @@ include_once("../Models/peticionesSql.php");
               </form>
             </div>
 
-            <div class="col-9"> <!--Tabla de datos -->
+            <div class="col-10"> <!--Tabla de datos -->
               <table class="table text-center">
                 <thead>
                   <tr class="table-dark rounded">
@@ -80,8 +80,8 @@ include_once("../Models/peticionesSql.php");
                       <td>
                         <!-- Button modal editar-->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> Modal </button>
-                        <!-- Button eliminar-->
-                        <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-pencil-square"></i> </a>
+                        <!-- Button modificar-->
+                        <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
                         <a class="btn btn-danger" href="../Views/eliminar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
                       </td>

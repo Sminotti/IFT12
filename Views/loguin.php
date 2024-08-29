@@ -1,6 +1,6 @@
 <?php
 include_once("Clases/Cconeccion.php");
-$conectarDB = Cconeccion::ConeccionDB();
+$conectarBD = Cconeccion::ConeccionDB();
 include_once("Models/peticionesSql.php");
 
 $usuario = $_POST['usuario']?? NULL;

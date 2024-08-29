@@ -5,7 +5,6 @@ $nombre = $_POST['nombre'] ?? null;
 $apellido = $_POST['apellido'] ?? null;
 $edad = $_POST['edad'] ?? null;
 $dni = $_POST['dni'] ?? null;
-$idPersona = $_GET['idPersona'] ?? null; // para el eliminar y modificar
 $usuario = $_POST['usuario'] ?? null;
 $legajo = $_POST['legajo'] ?? null;
 $cargo = $_POST['cargo'] ?? null;
@@ -14,6 +13,7 @@ $clave = $_POST['clave'] ?? null;
 $idUsuario = $_POST['idUsuario'] ?? null; // para crear empleado
 $idCargo = $_POST['idCargo'] ?? null; // para crear empleado
 $idEmpleado = $_GET['idEmpleado'] ?? null;
+$idPersona = $_POST['idPersona'] ?? null;
 
 //-------------------------------------SENTENCIAS----------------------------------------------------------------------------------------------------------------//
 // LOGIN //
@@ -32,21 +32,17 @@ INNER JOIN cargo ON empleado.idCargo  = cargo.idCargo
 INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
 WHERE empleado.habilitado=1 AND empleado.eliminado = 0 ORDER BY empleado.idEmpleado ASC ";
 // LISTAR CARGO
-$listarCargo = "SELECT idCargo,cargo FROM cargo WHERE habilitado=1, eliminado=0";
+$listarCargo = "SELECT idCargo,cargo FROM cargo WHERE habilitado=1 AND eliminado=0";
 // EDITAR EMPLEADOS---------------------------------------------------------------------------------------------------------//
-$listarEmpleado = "SELECT persona.idPersona, empleado.idEmpleado, persona.legajo, persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario, usuario.clave
+$listarEmpleado = "SELECT empleado.idEmpleado, empleado.idPersona,empleado.idCargo,empleado.idUsuario, persona.legajo, persona.nombre, persona.apellido, persona.edad, persona.dni, cargo.cargo, usuario.usuario, usuario.clave
 FROM empleado
 INNER JOIN persona ON empleado.idPersona = persona.idPersona 
 INNER JOIN cargo ON empleado.idCargo  = cargo.idCargo 
 INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
 WHERE idEmpleado='$idEmpleado' AND empleado.habilitado=1 AND empleado.eliminado=0";
-// Actualizar tabla persona
-$updatePersona = "UPDATE persona SET nombre='$nombre', apellido='$apellido', edad='$edad', dni='$dni' WHERE idPersona='$idPersona'";
-// Actualizar tabla usuario
-$updateUsuario = "UPDATE usuario SET usuario='$usuario', clave='$clave' WHERE idUsuario='$idUsuario'";
-// Actualizar tabla cargo
-$updateCargo = "UPDATE cargo SET cargo='$cargo' WHERE idCargo='$idCargo'";
+
 // EDITAR EMPLEADOS---------------------------------------------------------------------------------------------------------//
 
-// ELIMINAR REGISTRO PERSONAS//
-$eliminar = "UPDATE empleado SET habilitado=0 ,eliminado=1 WHERE idEmpleado='$idEmpleado'";
+// ELIMINAR REGISTRO EMPLEADOS (sin prepared)//
+//$eliminar = "UPDATE empleado SET habilitado=0 ,eliminado=1 WHERE idEmpleado='$idEmpleado'";
+// ELIMINAR REGISTRO EMPLEADOS//
