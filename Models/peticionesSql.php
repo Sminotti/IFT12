@@ -12,7 +12,7 @@ $cargo = $_POST['cargo'] ?? null;
 $clave = $_POST['clave'] ?? null;
 $idUsuario = $_POST['idUsuario'] ?? null; // para crear empleado
 $idCargo = $_POST['idCargo'] ?? null; // para crear empleado
-$idEmpleado = $_GET['idEmpleado'] ?? null;
+$idEmpleado = $_POST['idEmpleado'] ?? null;
 $idPersona = $_POST['idPersona'] ?? null;
 
 //-------------------------------------SENTENCIAS----------------------------------------------------------------------------------------------------------------//
@@ -21,7 +21,7 @@ $login = "SELECT usuario,clave FROM usuario WHERE usuario=$usuario AND clave=$cl
 // REGISTRO DE USUARIO //
 $crearPersona = "INSERT INTO persona (nombre,apellido,edad,dni,legajo) VALUES ('$nombre','$apellido','$edad','$dni','$legajo') ";
 // CREAR EMPLEADO
-$crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$idCargo','$idPersona','$idUsuario')";
+//$crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$idCargo','$idPersona','$idUsuario')";
 // LISTAR REGISTROS PERSONAS//
 $listarPersona = "SELECT idPersona,apellido,nombre,edad,dni FROM persona WHERE habilitado=1 AND eliminado = 0 ORDER BY idPersona DESC ";
 // EMPLEADOS

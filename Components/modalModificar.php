@@ -1,6 +1,13 @@
+<?php
+
+include_once("Clases/Cconeccion.php");
+$conectarDB = Cconeccion::ConeccionDB();
+include_once("Models/peticionesSql.php");
+$idObtenido = 0;
+?>
 
 <!-- Modal Modificar-->
-<div class="modal fade " id="modalModificar?idPersona=<?php  echo $row["idPersona"]; ?>" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true">
+<div class="modal fade " id="modalModificar?idPersona=<?php echo $row["idPersona"]; ?>" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -33,9 +40,6 @@
             <?php } ?>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

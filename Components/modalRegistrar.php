@@ -1,11 +1,9 @@
 <?php
-
 include_once("Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("Models/peticionesSql.php");
-$idObtenido = 0;
-?>
 
+?>
 
 
 <!-- Modal Registrar-->
@@ -25,8 +23,6 @@ $idObtenido = 0;
               <div class="d-grid gap-3">
 
                 <div class="p-2 bg-light border">
-                  <input type="text" name="idPersona" id="idPersona" style="display: none;">
-
                   <div class="input-group">
                     <span class="input-group-text" id="basic-addon1">Email</span>
                     <input type="email" name="usuario" class="form-control" placeholder="Nombre de usuario" id="registrarEmail" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
@@ -53,8 +49,8 @@ $idObtenido = 0;
                     <span class="input-group-text" id="basic-addon1">Legajo</span>
                     <input type="text" name="legajo" id="registrarDni">
                     <span class="input-group-text" id="basic-addon1">Cargo a desempeñar</span>
-                    <select class="form-select btn btn-secondary" style="width: auto;">
-                    <?php
+                    <select name="cargos" class="form-select btn btn-secondary" style="width: auto;">
+                      <?php
                       $listarCargos = mysqli_query($conectarDB, $listarCargo);
                       while ($row = mysqli_fetch_array($listarCargos)) { ?>
                         <option value="<?php echo $row["idCargo"] ?>"><?php echo $row["cargo"] ?></option>
@@ -66,7 +62,6 @@ $idObtenido = 0;
 
                 <div class="p-2 bg-light border">
                   <div class="input-group">
-                     <span class="input-group-text" id="basic-addon1">Legajo</span>
                     <button type="submit" name="Registrate" class="btn btn-primary form-control">Registrar empleado</button>
                   </div>
                 </div>
@@ -74,18 +69,23 @@ $idObtenido = 0;
               </div>
 
               <?php
+          
 
               if (isset($_POST['Registrate'])) {
-
+                $idCargo = $_POST['cargos'] ?? null;
                 $ingresarPersona = mysqli_query($conectarDB, $crearPersona);
                 $idPersonaObtenido = mysqli_insert_id($conectarDB);
 
                 if (isset($idPersonaObtenido)) {
 
-                  $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idObtenido', '$usuario', '$clave')";
+
+                  $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idPersonaObtenido', '$usuario', '$clave')";
                   $ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
                   $idUsuarioObtenido = mysqli_insert_id($conectarDB);
-                  $crearEmpleado = mysqli_query($conectarDB, $crearEmpleado);
+                  if (isset($idCargo)) {
+                    $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$idCargo','$idPersonaObtenido','$idUsuarioObtenido')";
+                    $IngresarEmpleado = mysqli_query($conectarDB, $crearEmpleado);
+                   }
                   echo "<script>alert('Usuario'creado exitosamente);</script>";
                 } else {
                   echo "<script>alert('Error al crear usuario.');</script>";
