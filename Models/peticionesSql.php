@@ -12,7 +12,7 @@ $cargo = $_POST['cargo'] ?? null;
 $clave = $_POST['clave'] ?? null;
 $idUsuario = $_POST['idUsuario'] ?? null; // para crear empleado
 $idCargo = $_POST['idCargo'] ?? null; // para crear empleado
-$idEmpleado = $_POST['idEmpleado'] ?? null;
+$idEmpleado = $_GET['idEmpleado'] ?? null;
 $idPersona = $_POST['idPersona'] ?? null;
 
 //-------------------------------------SENTENCIAS----------------------------------------------------------------------------------------------------------------//
@@ -30,7 +30,7 @@ FROM empleado
 INNER JOIN persona ON empleado.idPersona = persona.idPersona 
 INNER JOIN cargo ON empleado.idCargo  = cargo.idCargo 
 INNER JOIN usuario ON empleado.idUsuario = usuario.idUsuario
-WHERE empleado.habilitado=1 AND empleado.eliminado = 0 ORDER BY empleado.idEmpleado ASC ";
+WHERE empleado.habilitado = 1 AND empleado.eliminado = 0 ORDER BY empleado.idEmpleado ASC ";
 // LISTAR CARGO
 $listarCargo = "SELECT idCargo,cargo FROM cargo WHERE habilitado=1 AND eliminado=0";
 // EDITAR EMPLEADOS---------------------------------------------------------------------------------------------------------//

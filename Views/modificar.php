@@ -2,10 +2,6 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-$idPersona = $_GET['idPersona'] ?? null;
-$idUsuario = $_GET['idUsuario'] ?? null;
-$idCargo = $_GET['idCargo'] ?? null;
-$idEmpleado = $_GET['idEmpleado'] ?? null;
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +38,7 @@ $idEmpleado = $_GET['idEmpleado'] ?? null;
             <input type="text" name="dni" placeholder="Dni" value="<?php echo $row["dni"]; ?>" class="mt-2 form-control">
             <input type="text" name="usuario" placeholder="Usuario" value="<?php echo $row["usuario"]; ?>" class="mt-2 form-control">
             <input type="text" name="clave" placeholder="Clave" value="<?php echo $row["clave"]; ?>" class="mt-2 form-control">
+            <input type="text" name="cargo" placeholder="Cargo" value="<?php echo $row["cargo"];?>" class="mt-2 form-control">
             <button type="submit" name="modificar" class="mt-2 btn btn-primary form-control">Aceptar cambios</button>
             <?php
             // Modificar empleado
@@ -55,24 +52,24 @@ $idEmpleado = $_GET['idEmpleado'] ?? null;
                 if (!$stmtPersona->execute()) {
                   echo "Error al actualizar tabla persona: " . $stmtPersona->error;
                 }
-                
-                // Actualizar tabla cargo
-                $updateCargo = "UPDATE cargo SET cargo=? WHERE idCargo=?";
-                $stmtCargo = $conectarDB->prepare($updateCargo);
-                $stmtCargo->bind_param("si", $cargo, $idCargo);
-                if (!$stmtCargo->execute()) {
-                  echo "Error al actualizar tabla cargo: " . $stmtCargo->error;
-                }
 
                 // Actualizar tabla usuario
-                /*$updateUsuario = "UPDATE usuario SET usuario=?, clave=? WHERE idPersona=?";
+                $updateUsuario = "UPDATE usuario SET usuario=?, clave=? WHERE idPersona=?";
                 $stmtUsuario = $conectarDB->prepare($updateUsuario);
-                $stmtUsuario->bind_param("sssi", $usuario, $clave, $idPersona);
+                $stmtUsuario->bind_param("ssi", $usuario, $clave, $idPersona);
                 if (!$stmtUsuario->execute()) {
                   echo "Error al actualizar tabla usuario: " . $stmtUsuario->error;
-                }*/
+                }
 
-                if ($stmtPersona->affected_rows > 0 && $stmtUsuario->affected_rows > 0 && $stmtCargo->affected_rows > 0) {
+                // Actualizar idCargo de la tabla empleado
+                $updateEmpleado = "UPDATE empleado SET idCargo=? WHERE idPersona=?";
+                $stmtEmpleado = $conectarDB->prepare($updateEmpleado);
+                $stmtEmpleado->bind_param("ii", $idCargo, $idPersona);
+                if (!$stmtEmpleado->execute()) {
+                  echo "Error al actualizar tabla empleado: " . $stmtEmpleado->error;
+                }
+
+                if ($stmtPersona->affected_rows > 0 && $stmtUsuario->affected_rows > 0 && $stmtEmpleado->affected_rows > 0) {
                 echo "<script>alert('Registro modificado con exito')</script>";
                 header('location: listado.php');
                 }
