@@ -29,12 +29,39 @@ include_once("../Models/peticionesSql.php");
                 <input type="text" name="apellido" placeholder="apellido" class="mt-2 form-control">
                 <input type="text" name="edad" placeholder="edad" class="mt-2 form-control">
                 <input type="text" name="dni" placeholder="dni" class="mt-2 form-control">
-                <input type="text" name="cargo" placeholder="cargo" class="mt-2 form-control">
+                <div>
+                  <div class="input-group">
+                    <!-- LISTA DESPLEGABLE CARGAOS --------------------------------------->
+                    <select name="cargos" class="mt-2 form-select form-control btn btn-secondary">
+                      <?php
+                      $listarCargos = mysqli_query($conectarDB, $listarCargo);
+                      while ($row = mysqli_fetch_array($listarCargos)) { ?>
+                        <option value="<?php echo $row["idCargo"] ?>"><?php echo $row["cargo"] ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+                </div>
+                <!-- LISTA DESPLEGABLE CARGAOS --------------------------------------->
                 <button type="submit" name="enviar" class="mt-2 btn btn-primary form-control">Crear empleado</button>
                 <?php
                 // Crear persona
                 if (isset($_POST['enviar'])) {
-                  $ingresarRegistro = mysqli_query($conectarDB, $crearEmpleado);
+                  $idCargo = $_POST['cargos'] ?? null;
+                  $ingresarPersona = mysqli_query($conectarDB, $crearPersona);
+                  $idPersonaObtenido = mysqli_insert_id($conectarDB);
+
+                  if (isset($idPersonaObtenido)) {
+                    $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idPersonaObtenido', '$usuario', '$clave')";
+                    $ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
+                    $idUsuarioObtenido = mysqli_insert_id($conectarDB);
+                    if (isset($idCargo)) {
+                      $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$idCargo','$idPersonaObtenido','$idUsuarioObtenido')";
+                      $IngresarEmpleado = mysqli_query($conectarDB, $crearEmpleado);
+                    }
+                    echo "<script>alert('Usuario'creado exitosamente);</script>";
+                  } else {
+                    echo "<script>alert('Error al crear usuario.');</script>";
+                  }
                 }
                 ?>
                 <?php
