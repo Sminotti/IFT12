@@ -25,6 +25,7 @@ include_once("../Models/peticionesSql.php");
               <form method="post" class="d-grid bg-dark p-2 rounded">
                 <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
                 <input type="text" name="usuario" placeholder="usuario" class="mt-2 form-control">
+                <input type="text" name="clave" placeholder="clave" class="mt-2 form-control">
                 <input type="text" name="nombre" placeholder="nombre" class=" mt-2 form-control">
                 <input type="text" name="apellido" placeholder="apellido" class="mt-2 form-control">
                 <input type="text" name="edad" placeholder="edad" class="mt-2 form-control">

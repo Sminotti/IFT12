@@ -27,7 +27,7 @@ include_once("Models/peticionesSql.php");
                     <span class="input-group-text" id="basic-addon1">Email</span>
                     <input type="email" name="usuario" class="form-control" placeholder="Nombre de usuario" id="registrarEmail" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
                     <span class="input-group-text" id="basic-addon1">Password</span>
-                    <input type="password" name="clave" class="form-control" placeholder="Inegrese password" id="registrarClave" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
+                    <input type="password" name="clave" class="form-control" placeholder="Inegrese password" id="registrarClave" aria-label="Inegrese password" aria-describedby="basic-addon1">
                   </div>
                 </div>
                 <div class="p-2 bg-light border">
@@ -47,7 +47,7 @@ include_once("Models/peticionesSql.php");
                   <div class="input-group">
                     <!-- LISTA DESPLEGABLE CARGAOS --------------------------------------->
                     <span class="input-group-text" id="basic-addon1">Legajo</span>
-                    <input type="text" name="legajo" id="registrarDni">
+                    <input type="text" name="legajo" id="registrarLegajo">
                     <span class="input-group-text" id="basic-addon1">Cargo a desempeñar</span>
                     <select name="cargos" class="form-select btn btn-secondary" style="width: auto;">
                       <?php
