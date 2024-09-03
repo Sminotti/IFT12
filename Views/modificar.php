@@ -23,26 +23,28 @@ include_once("../Models/peticionesSql.php");
         <?php
         // Listar empleado para editar
         $listarRegistro = mysqli_query($conectarDB, $listarEmpleado);
-        while ($row = mysqli_fetch_array($listarRegistro)) { ?>
+        while ($rowModificar = mysqli_fetch_array($listarRegistro)) { ?>
           <form method="post" class="d-grid bg-dark p-2 rounded">
             <!-- OBTENER LOS ID -------------------------------------------------------------------------------------------------------->
-            <input type="text" name="idPersona" value="<?php echo $row["idPersona"]; ?>" style="display: none;">
-            <input type="text" name="idUsuario" value="<?php echo $row["idUsuario"]; ?>" style="display: none;">
-            <input type="text" name="idCargo" value="<?php echo $row["idCargo"]; ?>" style="display: none;">
-            <input type="text" name="idEmpleado" value="<?php echo $row["idEmpleado"]; ?>" style="display: none;">
+            <input type="text" name="idPersona" value="<?php echo $rowModificar["idPersona"]; ?>" style="display: none;">
+            <input type="text" name="idUsuario" value="<?php echo $rowModificar["idUsuario"]; ?>" style="display: none;">
+            <input type="text" name="idCargo" value="<?php echo $rowModificar["idCargo"]; ?>" style="display: none;">
+            <input type="text" name="idEmpleado" value="<?php echo $rowModificar["idEmpleado"]; ?>" style="display: none;">
             <!-- OBTENER LOS ID -------------------------------------------------------------------------------------------------------->
-            <input type="text" name="legajo" placeholder="Legajo" disabled value="<?php echo $row["legajo"]; ?>" class=" form-control">
-            <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $row["nombre"]; ?>" class=" mt-2 form-control">
-            <input type="text" name="apellido" placeholder="Apellido" value="<?php echo $row["apellido"]; ?>" class="mt-2 form-control">
-            <input type="text" name="edad" placeholder="edad" value="<?php echo $row["edad"]; ?>" class="mt-2 form-control">
-            <input type="text" name="dni" placeholder="Dni" value="<?php echo $row["dni"]; ?>" class="mt-2 form-control">
-            <input type="text" name="usuario" placeholder="Usuario" value="<?php echo $row["usuario"]; ?>" class="mt-2 form-control">
-            <input type="text" name="clave" placeholder="Clave" value="<?php echo $row["clave"]; ?>" class="mt-2 form-control">
+            <input type="text" name="legajo" placeholder="Legajo" disabled value="<?php echo $rowModificar["legajo"]; ?>" class=" form-control">
+            <input type="text" name="nombre" placeholder="Nombre" value="<?php echo $rowModificar["nombre"]; ?>" class=" mt-2 form-control">
+            <input type="text" name="apellido" placeholder="Apellido" value="<?php echo $rowModificar["apellido"]; ?>" class="mt-2 form-control">
+            <input type="text" name="edad" placeholder="edad" value="<?php echo $rowModificar["edad"]; ?>" class="mt-2 form-control">
+            <input type="text" name="dni" placeholder="Dni" value="<?php echo $rowModificar["dni"]; ?>" class="mt-2 form-control">
+            <input type="text" name="usuario" placeholder="Usuario" value="<?php echo $rowModificar["usuario"]; ?>" class="mt-2 form-control">
+            <input type="text" name="clave" placeholder="Clave" value="<?php echo $rowModificar["clave"]; ?>" class="mt-2 form-control">
             <div>
               <div class="input-group">
                 <!-- LISTA DESPLEGABLE CARGAOS --------------------------------------->
                 <select name="cargos" class="mt-2 form-select form-control btn btn-secondary">
+                <option value="<?php echo $rowModificar["idCargo"] ?>"><?php echo $rowModificar["cargo"] ?></option>
                   <?php
+                   
                   $listarCargos = mysqli_query($conectarDB, $listarCargo);
                   while ($row = mysqli_fetch_array($listarCargos)) { ?>
                     <option value="<?php echo $row["idCargo"] ?>"><?php echo $row["cargo"] ?></option>
@@ -77,9 +79,9 @@ include_once("../Models/peticionesSql.php");
 
               if (!$stmtPersona->execute() || !$stmtUsuario->execute() || !$stmtEmpleado->execute()) {
                 echo "Error al actualizar: " . $stmtPersona->error . $stmtUsuario->error . $stmtEmpleado->error;
-              } else {
+             //} else {
               
-                header('location: listado.php');
+               // header('location: listado.php');
               }
             }
             ?>

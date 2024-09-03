@@ -3,11 +3,10 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-
 ?>
 
 <!-- Modal Modificar-->
-<div class="modal fade " id="modalModificar?idPersona=<?php echo $row["idPersona"]; ?>" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true">
+<div class="modal fade " id="modalModificar" data-id-empleado="<?php echo $row["idEmpleado"]; ?>" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,7 +15,7 @@ include_once("../Models/peticionesSql.php");
       <div class="modal-body d-flex justify-content-center">
         <div class="card " style="width: 300px; height: auto ">
           <div class="card-header">
-            Modificar datos<?php echo $idPersona ?>
+           <?php echo"idEmpleado: " . $idEmpleado ?>
           </div>
           <div class="card-body">
           <?php

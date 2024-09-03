@@ -2,8 +2,6 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-//$idPersona = $_GET['idPersona'] ?? null;
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -48,6 +46,7 @@ include_once("../Models/peticionesSql.php");
                 // Crear persona
                 if (isset($_POST['enviar'])) {
                   $idCargo = $_POST['cargos'] ?? null;
+                  $idPersona = $_POST['idPersona'] ?? null;
                   $ingresarPersona = mysqli_query($conectarDB, $crearPersona);
                   $idPersonaObtenido = mysqli_insert_id($conectarDB);
 
@@ -107,7 +106,7 @@ include_once("../Models/peticionesSql.php");
                       <td><?php echo $row["cargo"]; ?></td>
                       <td>
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistro?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> Modal </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalModificar" data-id-empleado="<?php echo $row["idEmpleado"]; ?>"> Modal </button>
                         <!-- Button modificar-->
                         <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
