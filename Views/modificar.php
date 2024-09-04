@@ -42,9 +42,8 @@ include_once("../Models/peticionesSql.php");
               <div class="input-group">
                 <!-- LISTA DESPLEGABLE CARGAOS --------------------------------------->
                 <select name="cargos" class="mt-2 form-select form-control btn btn-secondary">
-                <option value="<?php echo $rowModificar["idCargo"] ?>"><?php echo $rowModificar["cargo"] ?></option>
+                  <option value="<?php echo $rowModificar["idCargo"] ?>"><?php echo $rowModificar["cargo"] ?></option>
                   <?php
-                   
                   $listarCargos = mysqli_query($conectarDB, $listarCargo);
                   while ($row = mysqli_fetch_array($listarCargos)) { ?>
                     <option value="<?php echo $row["idCargo"] ?>"><?php echo $row["cargo"] ?></option>
@@ -79,9 +78,9 @@ include_once("../Models/peticionesSql.php");
 
               if (!$stmtPersona->execute() || !$stmtUsuario->execute() || !$stmtEmpleado->execute()) {
                 echo "Error al actualizar: " . $stmtPersona->error . $stmtUsuario->error . $stmtEmpleado->error;
-             //} else {
-              
-               // header('location: listado.php');
+                //} else {
+
+                // header('location: listado.php');
               }
             }
             ?>

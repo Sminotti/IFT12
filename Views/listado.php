@@ -21,10 +21,10 @@ include_once("../Models/peticionesSql.php");
           <div class="row">
             <div class=" col-2 "><!--Formulario Crear empleado -->
               <h5 class="alert alert-secondary text-bg-dark">Ingrese empleado</h5>
-              <form method="post" class="d-grid bg-dark p-2 rounded">
-                <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
-                <input type="text" name="usuario" placeholder="usuario" class="mt-2 form-control">
-                <input type="text" name="clave" placeholder="clave" class="mt-2 form-control">
+              <form method="post" action="modalPrueba.php" class="d-grid bg-dark p-2 rounded">   
+                <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">    
+                <input type="email" name="usuario" placeholder="usuario" class="mt-2 form-control">
+                <input type="password" name="clave" placeholder="clave" class="mt-2 form-control">
                 <input type="text" name="nombre" placeholder="nombre" class=" mt-2 form-control">
                 <input type="text" name="apellido" placeholder="apellido" class="mt-2 form-control">
                 <input type="text" name="edad" placeholder="edad" class="mt-2 form-control">
@@ -93,10 +93,10 @@ include_once("../Models/peticionesSql.php");
                 <tbody>
 
                   <?php
-                  // Listar personas
+                  // Listar Empleados
                   $listarRegistros = mysqli_query($conectarDB, $listarEmpleados);
                   while ($row = mysqli_fetch_array($listarRegistros)) { ?>
-                      <?php $idEmpleado=$_POST['idEmpleado']??null;?>
+                      <?php $idEmpleado=['idEmpleado'];?>
                     <tr class="text-center">
                       <td><?php echo $row["idEmpleado"]; ?></td>
                       <td><?php echo $row["legajo"]; ?></td>
@@ -109,7 +109,7 @@ include_once("../Models/peticionesSql.php");
                       <td>
                   
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalModificar" data-id-empleado="<?php echo $row["idEmpleado"]; ?>"> <?php echo $row["idEmpleado"]; ?></button>     
+                        <button type="botton" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPrueba<?php echo $row["idEmpleado"]; ?>"><?php echo $row["idEmpleado"]; ?></button>     
                         <!-- Button modificar-->
                         <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
@@ -117,6 +117,7 @@ include_once("../Models/peticionesSql.php");
                       </td>
                   
                     </tr>
+                    
                   <?php } ?>
                 </tbody>
               </table>
@@ -126,7 +127,7 @@ include_once("../Models/peticionesSql.php");
       </div>
     </div>
   </div>
-  <?php include_once("../Components/modalModificar.php"); ?>
+  <?php include_once("../Components/modalPrueba.php"); ?>
   <?php include_once("../Template/footer.php"); ?>
 
 </body>

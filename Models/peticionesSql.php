@@ -17,11 +17,9 @@ $idPersona = $_POST['idPersona'] ?? null;
 
 //-------------------------------------SENTENCIAS----------------------------------------------------------------------------------------------------------------//
 // LOGIN //
-$login = "SELECT usuario,clave FROM usuario WHERE usuario=$usuario AND clave=$clave AND habilitado=1 AND eliminado = 0";
+$login = "SELECT usuario,clave FROM usuario WHERE usuario=$usuario AND clave=$clave AND habilitado=1 AND eliminado=0";
 // REGISTRO DE USUARIO //
 $crearPersona = "INSERT INTO persona (nombre,apellido,edad,dni,legajo) VALUES ('$nombre','$apellido','$edad','$dni','$legajo') ";
-// CREAR EMPLEADO
-//$crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$idCargo','$idPersona','$idUsuario')";
 // LISTAR REGISTROS PERSONAS//
 $listarPersona = "SELECT idPersona,apellido,nombre,edad,dni FROM persona WHERE habilitado=1 AND eliminado = 0 ORDER BY idPersona DESC ";
 // EMPLEADOS
@@ -43,6 +41,3 @@ WHERE idEmpleado='$idEmpleado' AND empleado.habilitado=1 AND empleado.eliminado=
 
 // EDITAR EMPLEADOS---------------------------------------------------------------------------------------------------------//
 
-// ELIMINAR REGISTRO EMPLEADOS (sin prepared)//
-//$eliminar = "UPDATE empleado SET habilitado=0 ,eliminado=1 WHERE idEmpleado='$idEmpleado'";
-// ELIMINAR REGISTRO EMPLEADOS//

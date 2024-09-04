@@ -1,10 +1,7 @@
 <?php
 include_once("Clases/Cconeccion.php");
 $conectarBD = Cconeccion::ConeccionDB();
-include_once("Models/peticionesSql.php");
-
-$usuario = $_POST['usuario']?? NULL;
-$password = $_POST['password'] ?? NULL;
+//include_once("Models/peticionesSql.php");
 ?>
 
 
@@ -15,33 +12,43 @@ $password = $_POST['password'] ?? NULL;
     Ingresa o registrate
   </div>
   <div class="card-body">
-      <!-- Boton login con validaciones-->
-<?php
-  if (isset($_POST['login'])) {
-    if (!empty($_POST['usuario'])&&!empty($_POST['usuario']) ) {
-      $ingresarLogin = mysqli_query($conectarDB, $login);
-      if($ingresarLogin){
-        header('location: Views/listado.php');
-      }    
-    }  else  {
-      echo " <div class='alert alert-danger' role='alert'> Ingrese usuario y contraseña</div>";
-    }    
-  }
-?>
- <!-- Boton login con validaciones-->
+
+    <!-- Boton login con validaciones-->
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="row g-3">
       <div>
-        <label for="inputEmail4" class="form-label">Email</label>
-        <input type="email" class="form-control" id="inputEmail4" name="usuario">
+        <label for="inputEmail" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail" name="usuario">
       </div>
       <div>
-        <label for="inputPassword4" class="form-label">Password</label>
-        <input type="password" class="form-control" id="inputPassword4" name="clave">
+        <label for="inputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword" name="clave">
       </div>
       <div class="mb-3">
         <button type="submit" name="login" class="btn btn-primary form-control">Ingrese</button>
       </div>
     </form>
+
+    <?php
+    // Boton login con validaciones
+    if (isset($_POST['login'])) {
+      if (!empty($_POST['usuario']) && !empty($_POST['clave'])) {
+        $login = "SELECT usuario, clave FROM usuario WHERE usuario = ? AND clave = ?";
+        $stmt = mysqli_prepare($conectarDB, $login);
+        mysqli_stmt_bind_param($stmt, "ss", $_POST['usuario'], $_POST['clave']);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        if (mysqli_num_rows($result) > 0) {
+          header('location: Views/listado.php');
+        } else {
+          echo " <div class='alert alert-danger' role='alert'> Usuario o contraseña incorrectos</div>";
+        }
+        mysqli_stmt_close($stmt);
+      } else {
+        echo " <div class='alert alert-danger' role='alert'> Ingrese usuario y contraseña</div>";
+      }
+    }
+    ?>
+
     <!--Boton modal Registro-->
     <button type="button" class="btn btn-primary form-control" data-bs-toggle="modal" data-bs-target="#modalRegistrar">
       Registrese
@@ -51,6 +58,6 @@ $password = $_POST['password'] ?? NULL;
 
 
 
-<?php 
-  include_once("Components/modalRegistrar.php"); 
+<?php
+include_once("Components/modalRegistrar.php");
 ?>
