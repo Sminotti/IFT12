@@ -2,6 +2,7 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -72,8 +73,8 @@ include_once("../Models/peticionesSql.php");
                 ?>
               </form>
             </div>
-
-            <div class="col-10"> <!--Tabla de datos -->
+<!--Tabla de datos ----------------------------------------------------------------------------------------------------------------------------------->
+            <div class="col-10"> 
               <table class="table text-center">
                 <thead>
                   <tr class="table-dark rounded">
@@ -95,6 +96,7 @@ include_once("../Models/peticionesSql.php");
                   // Listar personas
                   $listarRegistros = mysqli_query($conectarDB, $listarEmpleados);
                   while ($row = mysqli_fetch_array($listarRegistros)) { ?>
+                      <?php $idEmpleado=$_POST['idEmpleado']??null;?>
                     <tr class="text-center">
                       <td><?php echo $row["idEmpleado"]; ?></td>
                       <td><?php echo $row["legajo"]; ?></td>
@@ -105,13 +107,15 @@ include_once("../Models/peticionesSql.php");
                       <td><?php echo $row["dni"]; ?></td>
                       <td><?php echo $row["cargo"]; ?></td>
                       <td>
+                  
                         <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalModificar" data-id-empleado="<?php echo $row["idEmpleado"]; ?>"> Modal </button>
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalModificar" data-id-empleado="<?php echo $row["idEmpleado"]; ?>"> <?php echo $row["idEmpleado"]; ?></button>     
                         <!-- Button modificar-->
                         <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
                         <a class="btn btn-danger" href="../Views/eliminar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
                       </td>
+                  
                     </tr>
                   <?php } ?>
                 </tbody>
