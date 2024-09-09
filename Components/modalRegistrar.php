@@ -5,7 +5,6 @@ include_once("Models/peticionesSql.php");
 
 ?>
 
-
 <!-- Modal Registrar-->
 <div class="modal fade " id="modalRegistrar" tabindex="-1" aria-labelledby="modalRegistrarLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">

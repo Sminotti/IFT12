@@ -109,7 +109,9 @@ include_once("../Models/peticionesSql.php");
                       <td>
                   
                         <!-- Button modal editar-->
-                        <button type="botton" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPrueba<?php echo $row["idEmpleado"]; ?>"><?php echo $row["idEmpleado"]; ?></button>     
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPrueba" data-idempleado="<?php echo $row["idEmpleado"]; ?>"></button>
+
+                   
                         <!-- Button modificar-->
                         <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
@@ -127,7 +129,7 @@ include_once("../Models/peticionesSql.php");
       </div>
     </div>
   </div>
-  <?php include_once("../Components/modalPrueba.php"); ?>
+  <?php include_once("modificar.php"); ?>
   <?php include_once("../Template/footer.php"); ?>
 
 </body>
