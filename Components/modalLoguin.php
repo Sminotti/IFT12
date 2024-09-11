@@ -2,7 +2,7 @@
 include_once("Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("Models/peticionesSql.php");
-
+session_start();
 ?>
 
 <div class="modal fade " id="modalLoguin" tabindex="-1" aria-labelledby="modalLoguinLabel" aria-hidden="true">
@@ -42,6 +42,10 @@ include_once("Models/peticionesSql.php");
                                 mysqli_stmt_execute($stmt); // Execute the statement first
                                 $result = mysqli_stmt_get_result($stmt); // Then get the result
                                 if (mysqli_num_rows($result) > 0) {
+                                  
+                                        $_SESSION['usuario_logueado']= $result['usuario'];
+                                    
+                                    
                                     header('location: Views/listado.php');
                                     exit;
                                 } else {
