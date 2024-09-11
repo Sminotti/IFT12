@@ -8,9 +8,11 @@ body {
   background-color: #333;
   font-family: sans-serif;
   color: aliceblue;
- width: 100%;
- height: 100%;
- text-align: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-image: url('/fondo\ IFTS12.png'); /* Add this line */
+  background-size: cover;
 }
 
 .footer {

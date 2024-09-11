@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
---
+  USE personal;
 -- Estructura de tabla para la tabla `cargo`
 --
 

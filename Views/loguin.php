@@ -58,6 +58,3 @@ $conectarBD = Cconeccion::ConeccionDB();
 
 
 
-<?php
-include_once("Components/modalRegistrar.php");
-?>
