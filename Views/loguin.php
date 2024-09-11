@@ -33,18 +33,16 @@ $conectarBD = Cconeccion::ConeccionDB();
     if (isset($_POST['login'])) {
       if (!empty($_POST['usuario']) && !empty($_POST['clave'])) {
         $login = "SELECT usuario, clave FROM usuario WHERE usuario = ? AND clave = ?";
-        $stmt = mysqli_prepare($conectarDB, $login);
+        $stmt = mysqli_prepare($conectarBD, $login);
         mysqli_stmt_bind_param($stmt, "ss", $_POST['usuario'], $_POST['clave']);
-        $datosObtenidos  = mysqli_stmt_execute($stmt);
-         mysqli_stmt_get_result($stmt);
-        $result->fetch_assoc($datosObtenidos);
+        mysqli_stmt_execute($stmt); // Execute the statement first
+        $result = mysqli_stmt_get_result($stmt); // Then get the result
         if (mysqli_num_rows($result) > 0) {
-          echo $result;
           header('location: Views/listado.php');
+          exit;
         } else {
           echo " <div class='alert alert-danger' role='alert'> Usuario o contraseña incorrectos</div>";
         }
-        mysqli_stmt_close($stmt);
       } else {
         echo " <div class='alert alert-danger' role='alert'> Ingrese usuario y contraseña</div>";
       }
