@@ -2,6 +2,13 @@
 include_once("../Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+  // redirigir a la página de inicio de sesión si no está autenticado
+  header('Location: ../index.php');
+  exit;
+}
 
 ?>
 <!DOCTYPE html>
@@ -68,7 +75,7 @@ include_once("../Models/peticionesSql.php");
                 <?php
                 // Volver al login
                 if (isset($_POST['volverLogin'])) {
-                  header('location: ../index.php');
+                  header('locationn: ../index.php');
                 }
                 ?>
               </form>

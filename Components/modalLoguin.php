@@ -41,13 +41,14 @@ session_start();
                                 mysqli_stmt_bind_param($stmt, "ss", $_POST['usuario'], $_POST['clave']);
                                 mysqli_stmt_execute($stmt); // Execute the statement first
                                 $result = mysqli_stmt_get_result($stmt); // Then get the result
-                                if (mysqli_num_rows($result) > 0) {
-                                  
-                                        $_SESSION['usuario_logueado']= $result['usuario'];
-                                    
-                                    
-                                    header('location: Views/listado.php');
-                                    exit;
+                                if (mysqli_num_rows($result) > 0 && password_verify($_POST['clave'], $result['clave'])) {
+
+                                    $_SESSION['logged_in'] = true;
+                                    $_SESSION['logged_usuario'] = $result['usuario'];
+
+                                    // redirigir a listado.php
+                                    header('locationn: Views/listado.php');
+                                   
                                 } else {
                                     echo " <div class='alert alert-danger' role='alert'> Usuario o contraseña incorrectos</div>";
                                 }

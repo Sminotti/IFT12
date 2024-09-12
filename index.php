@@ -3,14 +3,6 @@ include_once("Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("Models/peticionesSql.php");
 
-
-//variable de sesion
-session_start();
-if (!isset ($_SESSION['idEmpleado'])) {
-echo "no esta logueado";
-//exit();
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +15,7 @@ echo "no esta logueado";
             <?php include_once("Template/navBar.php"); ?>
       </div>
 
-      <H1>bienvenido@ <?php echo $_SESSION['usuario_logueado'] ?></H1>
+
 
       <div>
             <?php include_once("Template/footer.php"); ?>

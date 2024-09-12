@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <button class="navbar-toggler me-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -30,6 +29,7 @@
       <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalRegistrar">
         Registrate
       </button>
+           <a class="btn btn-danger" href="../Controllers/cerrarSesision.php"><i class="bi bi-box-arrow-right"></i></a>
     </div>
 
 
