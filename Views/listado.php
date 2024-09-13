@@ -6,7 +6,9 @@ session_start();
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
   // redirigir a la página de inicio de sesión si no está autenticado
-  header('Location: ../index.php');
+
+  header('Location: ../noInicioSesion.php');
+  echo " <div class='alert alert-danger' role='alert'>paso por el listado</div>";
   exit;
 }
 

@@ -1,9 +1,35 @@
 <?php
-include_once("Clases/Cconeccion.php");
+require_once('Clases/Cconeccion.php');
 $conectarDB = Cconeccion::ConeccionDB();
-include_once("Models/peticionesSql.php");
 session_start();
-?>
+
+if (isset($_POST['botonLogin'])) {
+
+    if (!empty($_POST['usuario']) && !empty($_POST['clave'])) {
+        $loginQuery = "SELECT usuario, clave FROM usuario WHERE usuario = ? AND clave = ?";
+        $stmt = mysqli_prepare($conectarDB, $loginQuery);
+        mysqli_stmt_bind_param($stmt, "ss", $_POST['usuario'], $_POST['clave']);
+        mysqli_stmt_execute($stmt);
+
+        mysqli_stmt_bind_result($stmt, $usuarioBD, $claveHashBD);
+        mysqli_stmt_fetch($stmt);
+
+        // Verify password using password_verify()
+        if (!empty($claveHashBD)) {
+            $_SESSION['logged_in'] = true;
+            $_SESSION['logged_usuario'] = $usuarioBD;
+            $_SESSION['logged_clave'] = $claveHashBD;
+
+            echo "usuario: " . $usuarioBD . "clave: " . $claveHashBD;
+            header('location: ../Views/listado.php');
+            exit;
+        } else {
+            // Display error message
+            $error_message = 'Usuario o contraseña incorrecta';
+        }
+    }
+}
+?> 
 
 <div class="modal fade " id="modalLoguin" tabindex="-1" aria-labelledby="modalLoguinLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -28,38 +54,25 @@ session_start();
                                 <input type="password" class="form-control" id="inputPassword" name="clave">
                             </div>
                             <div class="mb-3">
-                                <button type="submit" name="login" class="btn btn-primary form-control">Ingrese</button>
+                                <button type="submit" name="botonLogin" class="btn btn-primary form-control">Ingrese</button>
                             </div>
                         </form>
-
-                        <?php
-                        // Boton login con validaciones
-                        if (isset($_POST['login'])) {
-                            if (!empty($_POST['usuario']) && !empty($_POST['clave'])) {
-                                $login = "SELECT usuario, clave FROM usuario WHERE usuario = ? AND clave = ?";
-                                $stmt = mysqli_prepare($conectarBD, $login);
-                                mysqli_stmt_bind_param($stmt, "ss", $_POST['usuario'], $_POST['clave']);
-                                mysqli_stmt_execute($stmt); // Execute the statement first
-                                $result = mysqli_stmt_get_result($stmt); // Then get the result
-                                if (mysqli_num_rows($result) > 0 && password_verify($_POST['clave'], $result['clave'])) {
-
-                                    $_SESSION['logged_in'] = true;
-                                    $_SESSION['logged_usuario'] = $result['usuario'];
-
-                                    // redirigir a listado.php
-                                    header('locationn: Views/listado.php');
-                                   
-                                } else {
-                                    echo " <div class='alert alert-danger' role='alert'> Usuario o contraseña incorrectos</div>";
-                                }
-                            } else {
-                                echo " <div class='alert alert-danger' role='alert'> Ingrese usuario y contraseña</div>";
-                            }
-                        }
-                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+<html>
+    <!-- your HTML code here -->
+    <?php if (isset($error_message)): ?>
+        <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center mx-auto mt-5" role="alert" style="height: 10vh; width: 50vh;">
+            <strong> <?= $error_message ?> </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+    <!-- rest of the HTML code -->
+</html>

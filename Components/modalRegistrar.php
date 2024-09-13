@@ -2,7 +2,6 @@
 include_once("Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("Models/peticionesSql.php");
-
 ?>
 
 <!-- Modal Registrar-->
@@ -68,7 +67,6 @@ include_once("Models/peticionesSql.php");
               </div>
 
               <?php
-          
 
               if (isset($_POST['Registrate'])) {
                 $idCargo = $_POST['cargos'] ?? null;
@@ -77,14 +75,20 @@ include_once("Models/peticionesSql.php");
 
                 if (isset($idPersonaObtenido)) {
 
-
-                  $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idPersonaObtenido', '$usuario', '$clave')";
-                  $ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
+                  $clave = $_POST['clave'];
+                  $hashed_password = password_hash($clave, PASSWORD_DEFAULT);
+                  $stmt = $conectarDB->prepare("INSERT INTO usuario (idPersona, usuario, clave) VALUES (?, ?, ?)");
+                  $stmt->bind_param("sss", $idPersonaObtenido, $usuario, $hashed_password);
+                  $stmt->execute();
+                  //$crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idPersonaObtenido', '$usuario', '$hashed_password')";
+                  //$crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idPersonaObtenido', '$usuario', '$clave')";
+                  //$ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
                   $idUsuarioObtenido = mysqli_insert_id($conectarDB);
+
                   if (isset($idCargo)) {
                     $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$idCargo','$idPersonaObtenido','$idUsuarioObtenido')";
                     $IngresarEmpleado = mysqli_query($conectarDB, $crearEmpleado);
-                   }
+                  }
                   echo "<script>alert('Usuario'creado exitosamente);</script>";
                 } else {
                   echo "<script>alert('Error al crear usuario.');</script>";
