@@ -17,7 +17,7 @@ session_start();
                     </div>
                     <div class="card-body">
                         <!-- Boton login con validaciones-->
-                        <form action="../Controllers/validarUsuario.php" method="post" class="row g-3">
+                        <form action="../IFT12/Controllers/validarUsuario.php" method="post" class="row g-3">
                             <div>
                                 <label for="inputEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="inputEmail" name="usuario">

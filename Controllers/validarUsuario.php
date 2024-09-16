@@ -8,26 +8,24 @@ $clave = $_POST['clave'];
 
 if (!empty($usuario) && !empty($clave)) {
 
-    $loginQuery = "SELECT usuario, clave FROM usuario WHERE usuario = ? ";
+    $loginQuery = "SELECT clave FROM usuario WHERE usuario = ? ";
     $stmt = mysqli_prepare($conectarDB, $loginQuery);
     mysqli_stmt_bind_param($stmt, "s", $usuario);
     mysqli_stmt_execute($stmt);
-    mysqli_stmt_bind_result($stmt, $db_usuario, $db_clave);
+    mysqli_stmt_bind_result($stmt, $db_clave);
     mysqli_stmt_fetch($stmt);
 
-    if ($db_clave) {
-        echo "   se encontro el usuario en la base de datos    " . $clave . "   con la clave:  " . $db_clave;
-        $_SESSION['logged_in'] = true;
-        header('Location: ../Views/listado.php');
-        /*
-        if (password_verify($clave, $db_clave)) {
-            $_SESSION['usuario'] = $db_usuario;
+    if (isset( $db_clave)) {
+      echo "hasta aca entra" . $clave ." ". $db_clave;
+      if (password_verify($clave, $db_clave)) {    
+        echo "entro al password_verify";
+            $_SESSION['usuario'] = $usuario;
             $_SESSION['logged_in'] = true;
-            header('Location: index.php');
+              header('Location: ../IFTS//Views/listado.php');
             exit;
         } else {
             $error_message = 'Usuario o contraseña incorrecta';
-        }*/
+        }
     } else {
         $error_message = 'No existe el usuario';
     }
