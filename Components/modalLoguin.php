@@ -2,34 +2,7 @@
 require_once('Clases/Cconeccion.php');
 $conectarDB = Cconeccion::ConeccionDB();
 session_start();
-
-if (isset($_POST['botonLogin'])) {
-
-    if (!empty($_POST['usuario']) && !empty($_POST['clave'])) {
-        $loginQuery = "SELECT usuario, clave FROM usuario WHERE usuario = ? AND clave = ?";
-        $stmt = mysqli_prepare($conectarDB, $loginQuery);
-        mysqli_stmt_bind_param($stmt, "ss", $_POST['usuario'], $_POST['clave']);
-        mysqli_stmt_execute($stmt);
-
-        mysqli_stmt_bind_result($stmt, $usuarioBD, $claveHashBD);
-        mysqli_stmt_fetch($stmt);
-
-        // Verify password using password_verify()
-        if (!empty($claveHashBD)) {
-            $_SESSION['logged_in'] = true;
-            $_SESSION['logged_usuario'] = $usuarioBD;
-            $_SESSION['logged_clave'] = $claveHashBD;
-
-            echo "usuario: " . $usuarioBD . "clave: " . $claveHashBD;
-            header('location: ../Views/listado.php');
-            exit;
-        } else {
-            // Display error message
-            $error_message = 'Usuario o contraseña incorrecta';
-        }
-    }
-}
-?> 
+?>
 
 <div class="modal fade " id="modalLoguin" tabindex="-1" aria-labelledby="modalLoguinLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -44,7 +17,7 @@ if (isset($_POST['botonLogin'])) {
                     </div>
                     <div class="card-body">
                         <!-- Boton login con validaciones-->
-                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="row g-3">
+                        <form action="../Controllers/validarUsuario.php" method="post" class="row g-3">
                             <div>
                                 <label for="inputEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="inputEmail" name="usuario">
@@ -67,12 +40,13 @@ if (isset($_POST['botonLogin'])) {
 
 
 <html>
-    <!-- your HTML code here -->
-    <?php if (isset($error_message)): ?>
-        <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center mx-auto mt-5" role="alert" style="height: 10vh; width: 50vh;">
-            <strong> <?= $error_message ?> </strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    <?php endif; ?>
-    <!-- rest of the HTML code -->
+<!-- your HTML code here -->
+<?php if (isset($error_message)): ?>
+    <div class="alert alert-warning alert-dismissible fade show d-flex align-items-center mx-auto mt-5" role="alert" style="height: 10vh; width: 50vh;">
+        <strong> <?= $error_message ?> </strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+<!-- rest of the HTML code -->
+
 </html>

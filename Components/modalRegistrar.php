@@ -77,17 +77,18 @@ include_once("Models/peticionesSql.php");
 
                   $clave = $_POST['clave'];
                   $hashed_password = password_hash($clave, PASSWORD_DEFAULT);
-                  $stmt = $conectarDB->prepare("INSERT INTO usuario (idPersona, usuario, clave) VALUES (?, ?, ?)");
-                  $stmt->bind_param("sss", $idPersonaObtenido, $usuario, $hashed_password);
-                  $stmt->execute();
-                  //$crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idPersonaObtenido', '$usuario', '$hashed_password')";
-                  //$crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idPersonaObtenido', '$usuario', '$clave')";
-                  //$ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
+                  $registrarPersonaQuery = "INSERT INTO usuario (idPersona, usuario, clave) VALUES (?, ?, ?)";
+                  $stmt = mysqli_prepare($conectarDB, $registrarPersonaQuery);
+                  mysqli_stmt_bind_param($stmt, "sss", $idPersonaObtenido, $usuario, $hashed_password);
+                  mysqli_stmt_execute($stmt);
+
                   $idUsuarioObtenido = mysqli_insert_id($conectarDB);
 
                   if (isset($idCargo)) {
-                    $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$idCargo','$idPersonaObtenido','$idUsuarioObtenido')";
-                    $IngresarEmpleado = mysqli_query($conectarDB, $crearEmpleado);
+                    $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES (?,?,?)";
+                    $stmt = mysqli_prepare($conectarDB, $crearEmpleado);
+                    mysqli_stmt_bind_param($stmt, "sss", $idCargo, $idPersonaObtenido, $idUsuarioObtenido);
+                    mysqli_stmt_execute($stmt);
                   }
                   echo "<script>alert('Usuario'creado exitosamente);</script>";
                 } else {
