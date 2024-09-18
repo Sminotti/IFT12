@@ -1,3 +1,6 @@
+
+
+
 <nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <button class="navbar-toggler me-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -5,7 +8,8 @@
     </button>
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header bg-secondary">
-        <h5 class="offcanvas-title " id="offcanvasNavbarLabel">Menu</h5>
+        
+        <h5 class="offcanvas-title " id="offcanvasNavbarLabel">Bienvenido:  <?php  echo " " . $_SESSION['usuario'] ?></h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body bg-dark">

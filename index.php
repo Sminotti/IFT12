@@ -2,7 +2,7 @@
 include_once("Clases/Cconeccion.php");
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("Models/peticionesSql.php");
-
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@ include_once("Models/peticionesSql.php");
             <?php include_once("Template/navBar.php"); ?>
       </div>
 
-
+    
 
       <div>
             <?php include_once("Template/footer.php"); ?>

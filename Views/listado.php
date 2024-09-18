@@ -12,6 +12,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
   exit;
 }
 
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -24,7 +25,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
   <div class="centrar">
     <div class="mt-5 card col-10">
-      <h5 class="card-header">Personal</h5>
+      <h5 class="card-header">Persona  <?php  echo " " . $_SESSION['usuario'] ?></h5>
       <div class="card-body">
         <div class=" text-center ">
           <div class="row">
