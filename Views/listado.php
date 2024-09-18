@@ -8,7 +8,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
   // redirigir a la página de inicio de sesión si no está autenticado
 
   header('Location: ../noInicioSesion.php');
- 
+
   exit;
 }
 
@@ -25,14 +25,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
   <div class="centrar">
     <div class="mt-5 card col-10">
-      <h5 class="card-header">Persona  <?php  echo " " . $_SESSION['usuario'] ?></h5>
+      <h5 class="card-header">Persona <?php echo " " . $_SESSION['usuario'] ?></h5>
       <div class="card-body">
         <div class=" text-center ">
           <div class="row">
             <div class=" col-2 "><!--Formulario Crear empleado -->
               <h5 class="alert alert-secondary text-bg-dark">Ingrese empleado</h5>
-              <form method="post" action="modalPrueba.php" class="d-grid bg-dark p-2 rounded">   
-                <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">    
+              <form method="post" action="listado.php" class="d-grid bg-dark p-2 rounded">
+                <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
                 <input type="email" name="usuario" placeholder="usuario" class="mt-2 form-control">
                 <input type="password" name="clave" placeholder="clave" class="mt-2 form-control">
                 <input type="text" name="nombre" placeholder="nombre" class=" mt-2 form-control">
@@ -52,22 +52,31 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                   </div>
                 </div>
                 <!-- LISTA DESPLEGABLE CARGAOS --------------------------------------->
-                <button type="submit" name="enviar" class="mt-2 btn btn-primary form-control">Crear empleado</button>
+                <button type="submit" name="crearEmpleado" class="mt-2 btn btn-primary form-control">Crear empleado</button>
                 <?php
                 // Crear persona
-                if (isset($_POST['enviar'])) {
+                if (isset($_POST['crearEmpleado'])) {
+
                   $idCargo = $_POST['cargos'] ?? null;
-                  $idPersona = $_POST['idPersona'] ?? null;
                   $ingresarPersona = mysqli_query($conectarDB, $crearPersona);
                   $idPersonaObtenido = mysqli_insert_id($conectarDB);
 
                   if (isset($idPersonaObtenido)) {
-                    $crearUsuario = "INSERT INTO usuario (idPersona, usuario, clave) VALUES ('$idPersonaObtenido', '$usuario', '$clave')";
-                    $ingresarUsuario = mysqli_query($conectarDB, $crearUsuario);
+
+                    $clave = $_POST['clave'];
+                    $hashed_password = password_hash($clave, PASSWORD_DEFAULT);
+                    $registrarPersonaQuery = "INSERT INTO usuario (idPersona, usuario, clave) VALUES (?, ?, ?)";
+                    $stmt = mysqli_prepare($conectarDB, $registrarPersonaQuery);
+                    mysqli_stmt_bind_param($stmt, "sss", $idPersonaObtenido, $usuario, $hashed_password);
+                    mysqli_stmt_execute($stmt);
+
                     $idUsuarioObtenido = mysqli_insert_id($conectarDB);
+
                     if (isset($idCargo)) {
-                      $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES ('$idCargo','$idPersonaObtenido','$idUsuarioObtenido')";
-                      $IngresarEmpleado = mysqli_query($conectarDB, $crearEmpleado);
+                      $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES (?,?,?)";
+                      $stmt = mysqli_prepare($conectarDB, $crearEmpleado);
+                      mysqli_stmt_bind_param($stmt, "sss", $idCargo, $idPersonaObtenido, $idUsuarioObtenido);
+                      mysqli_stmt_execute($stmt);
                     }
                     echo "<script>alert('Usuario'creado exitosamente);</script>";
                   } else {
@@ -83,8 +92,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 ?>
               </form>
             </div>
-<!--Tabla de datos ----------------------------------------------------------------------------------------------------------------------------------->
-            <div class="col-10"> 
+            <!--Tabla de datos ----------------------------------------------------------------------------------------------------------------------------------->
+            <div class="col-10">
               <table class="table text-center">
                 <thead>
                   <tr class="table-dark rounded">
@@ -106,7 +115,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                   // Listar Empleados
                   $listarRegistros = mysqli_query($conectarDB, $listarEmpleados);
                   while ($row = mysqli_fetch_array($listarRegistros)) { ?>
-                      <?php $idEmpleado=['idEmpleado'];?>
+                    <?php $idEmpleado = ['idEmpleado']; ?>
                     <tr class="text-center">
                       <td><?php echo $row["idEmpleado"]; ?></td>
                       <td><?php echo $row["legajo"]; ?></td>
@@ -117,19 +126,19 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <td><?php echo $row["dni"]; ?></td>
                       <td><?php echo $row["cargo"]; ?></td>
                       <td>
-                  
+
                         <!-- Button modal editar-->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPrueba" data-idempleado="<?php echo $row["idEmpleado"]; ?>"></button>
 
-                   
+
                         <!-- Button modificar-->
                         <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-pencil-square"></i> </a>
                         <!-- Button eliminar-->
                         <a class="btn btn-danger" href="../Views/eliminar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
                       </td>
-                  
+
                     </tr>
-                    
+
                   <?php } ?>
                 </tbody>
               </table>
