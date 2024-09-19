@@ -1,6 +1,4 @@
 
-
-
 <nav class="navbar navbar-dark bg-dark fixed-top">
   <div class="container-fluid">
     <button class="navbar-toggler me-auto" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
@@ -9,7 +7,7 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header bg-secondary">
         
-        <h5 class="offcanvas-title " id="offcanvasNavbarLabel">Bienvenido:  <?php  echo " " . $_SESSION['usuario'] ?></h5>
+        <h5 class="offcanvas-title " id="offcanvasNavbarLabel">Bienvenido: <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : "Ingrese Usuario" ?></h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body bg-dark">
@@ -25,18 +23,20 @@
     </div>
     <a class="navbar-brand text-white " href="../index.php">Proyecto Ifts12</a>
     <div class="ms-auto">
-      <!--Boton modal Loguin-->
-      <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalLoguin">
-        Ingresar
-      </button>
-      <!--Boton modal Registro-->
-      <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalRegistrar">
-        Registrate
-      </button>
-           <a class="btn btn-danger" href="../Controllers/cerrarSesision.php"><i class="bi bi-box-arrow-right"></i></a>
+    <?php if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])): ?>
+        <!--Boton modal Loguin-->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLoguin" >
+          Ingresar
+        </button>
+        <!--Boton modal Registro-->
+        <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modalRegistrar">
+          Registrate
+        </button>
+      <?php else: ?>
+      <!--Boton cerrar session-->
+        <a class="btn btn-danger" href="<?php echo dirname($_SERVER['PHP_SELF']) . '/Controllers/cerrarSesision.php'; ?>"><i class="bi bi-box-arrow-right"></i></a>
+      <?php endif; ?>
     </div>
-
-
   </div>
 </nav>
 
