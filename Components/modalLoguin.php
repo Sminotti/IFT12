@@ -1,9 +1,17 @@
 <?php
+
+require_once('Clases/Cconeccion.php');
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$conectarDB = Cconeccion::ConeccionDB();
+
+/*
 require_once('Clases/Cconeccion.php');
 $conectarDB = Cconeccion::ConeccionDB();
 session_start();
+*/
 ?>
-
 <div class="modal fade " id="modalLoguin" tabindex="-1" aria-labelledby="modalLoguinLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -17,7 +25,7 @@ session_start();
                     </div>
                     <div class="card-body">
                         <!-- Boton login con validaciones-->
-                        <form action="../IFT12/Controllers/validarUsuario.php" method="post" class="row g-3">
+                        <form action="../Controllers/validarUsuario.php" method="post" class="row g-3">
                             <div>
                                 <label for="inputEmail" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="inputEmail" name="usuario">
@@ -29,6 +37,7 @@ session_start();
                             <div class="mb-3">
                                 <button type="submit" name="botonLogin" class="btn btn-primary form-control">Ingrese</button>
                             </div>
+                           
                         </form>
                     </div>
                 </div>

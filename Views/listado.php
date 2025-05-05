@@ -1,8 +1,11 @@
 <?php
 include_once("../Clases/Cconeccion.php");
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
-session_start();
+
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
   // redirigir a la página de inicio de sesión si no está autenticado
