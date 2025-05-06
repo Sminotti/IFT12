@@ -1,21 +1,23 @@
 <?php
 include_once("../Clases/Cconeccion.php");
 if (session_status() === PHP_SESSION_NONE) {
-  session_start();
+    session_start();
 }
 $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
 
-
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-  // redirigir a la página de inicio de sesión si no está autenticado
-
-  header('Location: ../noInicioSesion.php');
-
-  exit;
+    header('Location: ../index.php');
+    exit;
 }
 
-
+// Define las consultas necesarias
+$listarCargo = "SELECT idCargo, cargo FROM cargos";
+$listarEmpleados = "SELECT e.idEmpleado, e.legajo, u.usuario, p.nombre, p.apellido, p.edad, p.dni, c.cargo 
+                    FROM empleado e
+                    JOIN usuario u ON e.idUsuario = u.idUsuario
+                    JOIN persona p ON e.idPersona = p.idPersona
+                    JOIN cargos c ON e.idCargo = c.idCargo";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -28,13 +30,14 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
   <div class="centrar">
     <div class="mt-5 card col-10">
-      <h5 class="card-header">Persona <?php echo " " . $_SESSION['usuario'] ?></h5>
+      <h5 class="card-header">Persona <?php echo " " . htmlspecialchars($_SESSION['usuario'], ENT_QUOTES, 'UTF-8'); ?></h5>
       <div class="card-body">
-        <div class=" text-center ">
+        <div class="text-center">
           <div class="row">
-            <div class=" col-2 "><!--Formulario Crear empleado -->
+            <div class="col-2">
               <h5 class="alert alert-secondary text-bg-dark">Ingrese empleado</h5>
               <form method="post" action="listado.php" class="d-grid bg-dark p-2 rounded">
+                <!-- Formulario de creación de empleado -->
                 <input type="text" name="legajo" placeholder="legajo" class="mt-2 form-control">
                 <input type="email" name="usuario" placeholder="usuario" class="mt-2 form-control">
                 <input type="password" name="clave" placeholder="clave" class="mt-2 form-control">
@@ -95,7 +98,6 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                 ?>
               </form>
             </div>
-            <!--Tabla de datos ----------------------------------------------------------------------------------------------------------------------------------->
             <div class="col-10">
               <table class="table text-center">
                 <thead>
@@ -111,15 +113,11 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
-
                 <tbody>
-
                   <?php
-                  // Listar Empleados
                   $listarRegistros = mysqli_query($conectarDB, $listarEmpleados);
                   while ($row = mysqli_fetch_array($listarRegistros)) { ?>
-                    <?php $idEmpleado = ['idEmpleado']; ?>
-                    <tr class="text-center">
+                    <tr>
                       <td><?php echo $row["idEmpleado"]; ?></td>
                       <td><?php echo $row["legajo"]; ?></td>
                       <td><?php echo $row["usuario"]; ?></td>
@@ -129,19 +127,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
                       <td><?php echo $row["dni"]; ?></td>
                       <td><?php echo $row["cargo"]; ?></td>
                       <td>
-
-                        <!-- Button modal editar-->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalPrueba" data-idempleado="<?php echo $row["idEmpleado"]; ?>"></button>
-
-
-                        <!-- Button modificar-->
-                        <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-pencil-square"></i> </a>
-                        <!-- Button eliminar-->
-                        <a class="btn btn-danger" href="../Views/eliminar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"> <i class="bi bi-trash3-fill"></i></a>
+                        <a class="btn btn-primary" href="../Views/modificar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-pencil-square"></i></a>
+                        <a class="btn btn-danger" href="../Views/eliminar.php?idEmpleado=<?php echo $row["idEmpleado"]; ?>"><i class="bi bi-trash3-fill"></i></a>
                       </td>
-
                     </tr>
-
                   <?php } ?>
                 </tbody>
               </table>
@@ -151,7 +140,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
       </div>
     </div>
   </div>
-  <?php include_once("modificar.php"); ?>
+
   <?php include_once("../Template/footer.php"); ?>
 
 </body>

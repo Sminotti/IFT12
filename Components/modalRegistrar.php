@@ -87,7 +87,7 @@ include_once("Models/peticionesSql.php");
                   if (isset($idCargo)) {
                     $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES (?,?,?)";
                     $stmt = mysqli_prepare($conectarDB, $crearEmpleado);
-                    mysqli_stmt_bind_param($stmt, "iss", $idCargo, $idPersonaObtenido, $idUsuarioObtenido);
+                    mysqli_stmt_bind_param($stmt, "iii", $idCargo, $idPersonaObtenido, $idUsuarioObtenido);
                     mysqli_stmt_execute($stmt);
                   }
                   echo "<script>alert('Usuario'creado exitosamente);</script>";
