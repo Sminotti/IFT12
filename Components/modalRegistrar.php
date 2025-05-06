@@ -79,7 +79,7 @@ include_once("Models/peticionesSql.php");
                   $hashed_password = password_hash($clave, PASSWORD_DEFAULT);
                   $registrarPersonaQuery = "INSERT INTO usuario (idPersona, usuario, clave) VALUES (?, ?, ?)";
                   $stmt = mysqli_prepare($conectarDB, $registrarPersonaQuery);
-                  mysqli_stmt_bind_param($stmt, "sss", $idPersonaObtenido, $usuario, $hashed_password);
+                  mysqli_stmt_bind_param($stmt, "iss", $idPersonaObtenido, $usuario, $hashed_password);
                   mysqli_stmt_execute($stmt);
 
                   $idUsuarioObtenido = mysqli_insert_id($conectarDB);
@@ -87,7 +87,7 @@ include_once("Models/peticionesSql.php");
                   if (isset($idCargo)) {
                     $crearEmpleado = "INSERT INTO empleado (idCargo,idPersona,idUsuario) VALUES (?,?,?)";
                     $stmt = mysqli_prepare($conectarDB, $crearEmpleado);
-                    mysqli_stmt_bind_param($stmt, "sss", $idCargo, $idPersonaObtenido, $idUsuarioObtenido);
+                    mysqli_stmt_bind_param($stmt, "iss", $idCargo, $idPersonaObtenido, $idUsuarioObtenido);
                     mysqli_stmt_execute($stmt);
                   }
                   echo "<script>alert('Usuario'creado exitosamente);</script>";

@@ -24,15 +24,16 @@ session_start();
                         <h5 class="card-title text-center">Ingrese Usuario y Contraseña</h5>
                     </div>
                     <div class="card-body">
+                        
                         <!-- Boton login con validaciones-->
                         <form action="../Controllers/validarUsuario.php" method="post" class="row g-3">
                             <div>
-                                <label for="inputEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="inputEmail" name="usuario">
+                                <label for="inputUsuario" class="form-label">Email</label>
+                                <input type="usuario" class="form-control" id="inputUsuario" name="usuario">
                             </div>
                             <div>
-                                <label for="inputPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="inputPassword" name="clave">
+                                <label for="inputClave" class="form-label">Password</label>
+                                <input type="clave" class="form-control" id="inputClave" name="clave">
                             </div>
                             <div class="mb-3">
                                 <button type="submit" name="botonLogin" class="btn btn-primary form-control">Ingrese</button>
