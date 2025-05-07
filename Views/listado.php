@@ -7,7 +7,7 @@ $conectarDB = Cconeccion::ConeccionDB();
 include_once("../Models/peticionesSql.php");
 
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header('Location: ../index.php');
+    header('Location: ../Views/noInicioSesion.php');
     exit;
 }
 

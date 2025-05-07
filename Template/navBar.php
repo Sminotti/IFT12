@@ -17,17 +17,17 @@ error_reporting(E_ALL);
       <div class="offcanvas-body bg-dark">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-           <!-- <a class="nav-link active" aria-current="page" href="../index.php">Home</a> para usar en casa -->
-            <a class="nav-link active" aria-current="page" href="../IFT12/index.php">Home</a><!-- para usar en el trabajo -->
+            <a class="nav-link active" aria-current="page" href="../index.php">Home</a>
+            <!--<a class="nav-link active" aria-current="page" href="../IFT12/index.php">Home</a>--><!-- para usar en el trabajo -->
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="Views/listado.php">Listar Empleados </a>
+            <a class="nav-link " href="../Views/listado.php">Listar Empleados </a>
           </li>
         </ul>
       </div>
     </div>
-    <!--<a class="navbar-brand text-white " href="../index.php">Proyecto La canchita de los pibes</a> para usar en casa -->
-    <a class="navbar-brand text-white " href="../IFT12/index.php">Proyecto La canchita de los pibes</a><!-- para usar en el trabajo -->
+    <a class="navbar-brand text-white " href="../index.php">Proyecto La canchita de los pibes</a>
+    <!--<a class="navbar-brand text-white " href="../IFT12/index.php">Proyecto La canchita de los pibes</a>--><!-- para usar en el trabajo -->
     <div class="ms-auto">
     <?php if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) { ?>
         <!--Boton modal Loguin-->

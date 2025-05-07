@@ -1,6 +1,5 @@
 <?php
-/*require_once('../Clases/Cconeccion.php');*//*PARA USAR EN CASA*/
-require_once('Clases/Cconeccion.php');/*PARA USAR EN EL TRABAJO*/
+require_once('Clases/Cconeccion.php');/*PARA USAR EN CASA*/
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -18,8 +17,8 @@ $conectarDB = Cconeccion::ConeccionDB();
                         <h5 class="card-title text-center">Ingrese Usuario y Contraseña</h5>
                     </div>
                     <div class="card-body">
-                       <!-- <form action="../Controllers/validarUsuario.php" method="post" class="row g-3">--><!--PARA USAR EN CASA-->
-                        <form action="Controllers/validarUsuario.php" method="post" class="row g-3"><!--PARA USAR EN EL TRABAJO-->    
+                       <form action="../Controllers/validarUsuario.php" method="post" class="row g-3"><!--PARA USAR EN CASA-->
+                        <!--<form action="Controllers/validarUsuario.php" method="post" class="row g-3"> PARA USAR EN EL TRABAJO-->    
                             <div>
                                 <label for="inputUsuario" class="form-label">Usuario</label>
                                 <input type="text" class="form-control" id="inputUsuario" name="usuario" required>
